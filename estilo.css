@@ -1,0 +1,450 @@
+/* Nicole Leão · Psicóloga Clínica: estilos compartilhados por todas as páginas.
+   Mobile primeiro: uma coluna no celular, duas a partir de 900px. */
+
+:root{
+  /* Paleta da marca */
+  --creme:#F8F6ED;
+  --papel:#FFFDF8;
+  --ameixa:#664B5E;        /* títulos e botões: 7,1:1 sobre creme */
+  --ameixa-escura:#4E3848; /* hover */
+  --texto:#3B3138;         /* corpo de texto */
+  --verde:#395135;         /* rodapé e destaques escuros */
+  --verde-escuro:#2E422B;
+  /* Cores decorativas: só ícones, linhas e fundos, nunca texto */
+  --salvia:#8BA686;
+  --malva:#A6869D;
+  /* Variações acessíveis para texto (ajuste de contraste) */
+  --salvia-texto:#55704F;  /* 5,1:1 sobre creme */
+  --malva-texto:#76596D;   /* 5,7:1 sobre creme */
+  --salvia-clara:#B9CDB5;  /* 5,2:1 sobre verde */
+  --tint-salvia:#E9EFE6;
+  --tint-malva:#F0E8ED;
+  --linha:#E4DED1;
+
+  --f-display:"Newsreader", "Iowan Old Style", Georgia, serif;
+  --f-corpo:"Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --t-xs:.8125rem; --t-s:.9375rem; --t-m:1.0625rem; --t-l:1.25rem;
+  --t-xl:clamp(1.6rem, 1.2rem + 1.8vw, 2.25rem);
+  --t-xxl:clamp(2.1rem, 1.5rem + 3vw, 3.4rem);
+  --raio:14px;
+  --arco:200px;
+  /* Cabeçalho: recuo da área segura (entalhe/ilha) + um respiro, para nada encostar no topo do aparelho */
+  --topo-respiro:10px;
+  --topo-linha:60px;
+  --topo-altura:calc(var(--topo-respiro) + var(--topo-linha) + env(safe-area-inset-top, 0px));
+  /* Movimento: saída forte para entradas e toques, curva longa para deslocamentos */
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.77,0,.175,1);
+  --gut-l:max(20px, env(safe-area-inset-left, 0px));
+  --gut-r:max(20px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+  interpolate-size:allow-keywords; /* deixa as perguntas frequentes abrirem com transição */
+}
+
+/* Base */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:var(--topo-altura);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+/* Encaixe nas seções: só quando a rolagem para perto do início de uma delas (proximity),
+   sem prender a leitura dos textos longos; o cabeçalho fixo é descontado pelo scroll-padding */
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-snap-type:y proximity}
+  main > section,.rodape{scroll-snap-align:start}
+}
+body{margin:0;background:var(--creme);color:var(--texto);font-family:var(--f-corpo);font-size:var(--t-m);line-height:1.65;font-optical-sizing:auto}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--ameixa);text-underline-offset:3px}
+h1,h2,h3,h4{font-family:var(--f-display);color:var(--ameixa);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:var(--t-xl);letter-spacing:-.01em}
+h3{font-size:var(--t-l);line-height:1.3}
+p{margin:0;text-wrap:pretty}
+ul,ol{margin:0;padding:0}
+:focus-visible{outline:3px solid var(--salvia-texto);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pular{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ameixa);color:var(--creme);padding:10px 16px;border-radius:8px}
+.pular:focus{top:calc(12px + env(safe-area-inset-top, 0px))}
+
+/* Estrutura */
+.cont{max-width:1120px;margin-inline:auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.estreito{max-width:760px}
+.faixa{padding-block:clamp(56px, 9vw, 104px)}
+.faixa.clara{background:var(--papel)}
+.faixa.salvia{background:var(--tint-salvia)}
+/* Mesmo padrão de dente-de-leão do rodapé, em ameixa bem suave sobre o rosa */
+.faixa.malva{background:var(--tint-malva) url("assets/padrao-flor-malva.svg") repeat;background-size:132px}
+.intro{display:grid;gap:14px;max-width:680px;margin-bottom:clamp(28px,5vw,44px)}
+.duas{display:grid;gap:28px}
+.duas .texto{display:grid;gap:16px;min-width:0;align-content:start}
+@media (min-width:900px){.duas{grid-template-columns:1fr 1fr;gap:64px}}
+
+/* Linha de rótulo do ciclo do dente-de-leão */
+.rotulo{display:flex;align-items:center;gap:8px;font-size:var(--t-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--salvia-texto)}
+.rotulo svg{width:22px;height:22px;flex:none;stroke:var(--salvia);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.rotulo svg.mini{width:34px;height:22px;fill:var(--salvia);stroke:none}
+.rotulo .sep{color:var(--salvia)}
+.kw{display:block;font-family:var(--f-corpo);font-size:var(--t-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--salvia-texto);margin-bottom:14px;line-height:1.5}
+.publico{font-size:var(--t-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--malva-texto);line-height:1.4}
+
+/* Botões e links de ação */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:999px;font-weight:700;font-size:var(--t-m);text-decoration:none;line-height:1.2;text-align:center;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:background-color .2s ease, color .2s ease, border-color .2s ease, transform .14s var(--ease-out);touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.btn svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn:active{transform:scale(.97)}
+.btn-pri{background:var(--ameixa);color:var(--creme)}
+.btn-sec{background:transparent;color:var(--ameixa);border-color:var(--ameixa)}
+.btn-claro{background:var(--creme);color:var(--verde)}
+.link-seta{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;font-size:var(--t-s);color:var(--ameixa);text-decoration:none;touch-action:manipulation}
+.link-seta span{text-decoration:underline;text-decoration-color:var(--malva);text-decoration-thickness:1.5px;text-underline-offset:5px;transition:text-decoration-color .2s ease}
+.link-seta svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s var(--ease-out)}
+.links{display:flex;flex-wrap:wrap;gap:0 24px}
+.acoes{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;font-size:var(--t-s);font-weight:600;padding:5px 14px;border-radius:999px;background:var(--tint-salvia);color:var(--verde)}
+
+/* ---------- Cabeçalho e menu (todas as páginas) ---------- */
+/* O próprio cabeçalho cobre a área do entalhe com o seu fundo e empurra o conteúdo para baixo dela */
+.topo{position:sticky;top:0;z-index:50;padding-top:calc(var(--topo-respiro) + env(safe-area-inset-top, 0px));background:rgba(248,246,237,.92);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid transparent;transition:border-color .2s ease, box-shadow .2s ease}
+/* A borda só aparece quando há conteúdo passando por baixo */
+.topo.rolado{border-bottom-color:var(--linha);box-shadow:0 10px 24px -20px rgba(78,56,72,.45)}
+.topo .cont{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:var(--topo-linha)}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ameixa);min-width:0}
+.marca-simb{width:58px;height:36px;flex:none;fill:var(--ameixa);margin-right:-4px}
+.marca b{font-family:var(--f-display);font-weight:500;font-size:1.2rem;display:block;line-height:1.1;white-space:nowrap}
+.marca small{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--salvia-texto);font-weight:700;white-space:nowrap}
+
+.topo-acoes{display:flex;align-items:center}
+.menu-btn{width:48px;height:48px;border:0;background:transparent;border-radius:10px;display:grid;place-items:center;cursor:pointer;color:var(--ameixa);touch-action:manipulation}
+.menu-btn:active{background:var(--tint-malva)}
+.menu-btn svg{width:26px;height:26px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;grid-area:1/1}
+.menu-btn .ic-fechar{display:none}
+.menu-btn[aria-expanded="true"] .ic-abrir{display:none}
+.menu-btn[aria-expanded="true"] .ic-fechar{display:block}
+
+/* Celular: painel que surge sob o cabeçalho, com rolagem própria se a tela for baixa */
+.nav{position:absolute;left:0;right:0;top:100%;max-height:calc(100dvh - var(--topo-altura));overflow-y:auto;overscroll-behavior:contain;background:var(--creme);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);box-shadow:0 22px 34px -24px rgba(78,56,72,.45);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .22s var(--ease-out), transform .22s var(--ease-out), visibility .22s}
+.nav.aberto{opacity:1;visibility:visible;transform:none}
+.nav-lista{list-style:none;display:grid;gap:2px;padding:10px var(--gut-r) calc(16px + env(safe-area-inset-bottom,0px)) var(--gut-l)}
+.nav a{display:flex;align-items:center;min-height:50px;padding:6px 12px;text-decoration:none;font-weight:600;color:var(--ameixa);border-radius:10px}
+.nav a:active{background:var(--tint-malva)}
+.nav a[aria-current="page"]{background:var(--tint-malva)}
+.nav-rotulo{display:block;padding:14px 12px 4px;font-size:var(--t-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--salvia-texto)}
+.nav-sub-btn{display:none}
+.nav-sub{list-style:none;display:grid;gap:2px}
+.nav-sub a{padding-left:24px}
+
+/* Computador: menu em linha, com "Atendimentos" abrindo um painel ancorado no próprio botão */
+@media (min-width:1000px){
+  .topo-acoes{display:none}
+  .marca-simb{width:72px;height:45px;margin-right:-6px}
+  .nav{position:static;max-height:none;overflow:visible;box-shadow:none;border:0;background:none;opacity:1;visibility:visible;transform:none;transition:none}
+  .nav-lista{display:flex;align-items:center;gap:2px;padding:0}
+  .nav a{min-height:0;padding:10px;font-size:var(--t-s);border-radius:8px}
+  .nav a[aria-current="page"],.nav-grupo.atual .nav-sub-btn{background:none;box-shadow:inset 0 -2px 0 var(--malva);border-radius:0}
+  .nav-rotulo{display:none}
+  .nav-grupo{position:relative}
+  .nav-sub-btn{display:inline-flex;align-items:center;gap:4px;padding:10px;border:0;background:none;font:inherit;font-size:var(--t-s);font-weight:600;color:var(--ameixa);border-radius:8px;cursor:pointer}
+  .nav-sub-btn svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s var(--ease-out)}
+  .nav-grupo.aberto .nav-sub-btn svg{transform:rotate(180deg)}
+  .nav-sub{position:absolute;top:calc(100% + 10px);left:-8px;min-width:280px;padding:8px;background:var(--papel);border:1px solid var(--linha);border-radius:var(--raio);box-shadow:0 24px 48px -24px rgba(78,56,72,.45);opacity:0;visibility:hidden;transform:translateY(-4px) scale(.97);transform-origin:top left;transition:opacity .16s var(--ease-out), transform .16s var(--ease-out), visibility .16s}
+  .nav-grupo.aberto .nav-sub{opacity:1;visibility:visible;transform:none}
+  .nav-sub a{padding:10px 12px;border-radius:10px}
+  .nav-sub a[aria-current="page"]{background:var(--tint-malva);box-shadow:none;border-radius:10px}
+}
+
+/* ---------- Página inicial ---------- */
+
+/* Abertura: no celular, rosto primeiro e tudo centralizado, como um cartão de apresentação.
+   Orçamento vertical: o botão principal precisa caber na primeira tela (~660px no iPhone). */
+.hero{padding-block:clamp(10px, 8vw - 20px, 72px) clamp(44px,7vw,88px)}
+.hero .cont{display:grid;gap:20px;justify-items:center;text-align:center}
+.hero-texto{display:grid;gap:16px;justify-items:center;max-width:600px}
+.hero h1{font-size:var(--t-xxl);letter-spacing:-.02em;line-height:1.06}
+.hero .kw{margin-bottom:10px}
+.hero .sub{font-size:var(--t-m);line-height:1.55;max-width:38ch}
+.hero .chips{justify-content:center}
+.hero-ctas{display:grid;gap:12px;justify-items:center;width:100%;margin-top:4px}
+.hero-ctas .btn{width:100%;max-width:420px}
+.hero-ctas .link-seta{margin-top:-6px}
+.hero-foto{order:-1;position:relative;width:min(176px,46vw);margin:0 0 14px}
+.moldura{aspect-ratio:4/5;border-radius:var(--arco) var(--arco) var(--raio) var(--raio);overflow:hidden;background:linear-gradient(170deg,var(--tint-malva),var(--tint-salvia))}
+.moldura img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.selo{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;background:var(--papel);border:1px solid var(--linha);border-radius:999px;padding:6px 14px;font-size:var(--t-xs);font-weight:700;color:var(--verde);box-shadow:0 8px 20px -14px rgba(57,81,53,.55)}
+.selo svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--salvia-texto);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:900px){
+  .hero .cont{grid-template-columns:1.15fr .85fr;gap:64px;text-align:left;justify-items:stretch;align-items:center}
+  .hero .sub{font-size:var(--t-l)}
+  .hero-texto,.hero-ctas{justify-items:start}
+  .hero .chips{justify-content:flex-start}
+  .hero-foto{order:0;width:100%;max-width:420px;justify-self:end}
+}
+
+/* Faixa de confiança */
+.confianca{border-block:1px solid var(--linha);background:var(--papel)}
+.confianca ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;padding-block:22px}
+.confianca li{display:grid;gap:2px}
+.confianca b{font-family:var(--f-display);font-size:1.2rem;font-weight:500;color:var(--ameixa);line-height:1.2}
+.confianca span{font-size:var(--t-xs)}
+@media (min-width:800px){.confianca ul{grid-template-columns:repeat(4,1fr)}}
+
+/* Sinais por público: sem JS, as quatro listas aparecem uma embaixo da outra, cada uma com seu título */
+.sinais-abas{display:none}
+.sinais-paineis{display:grid;gap:28px}
+.sinais-painel{display:grid;gap:14px;align-content:start}
+.sinais-tit{font-size:1.15rem}
+.motivos{list-style:none;display:grid;border-bottom:1px solid var(--linha)}
+.motivos li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--linha);line-height:1.5}
+.motivos svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--salvia-texto);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.motivos-fim{display:grid;gap:16px;margin-top:32px;justify-items:start}
+
+/* Com JS: abas em linha (rolagem lateral no celular) e os painéis empilhados no mesmo lugar,
+   para a página não mudar de altura a cada troca */
+.sinais-troca.pronto .sinais-abas{position:relative;display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;scroll-snap-type:x proximity;margin:0 calc(-1 * var(--gut-r)) 22px calc(-1 * var(--gut-l));padding:2px var(--gut-r) 4px var(--gut-l);-webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 32px),transparent)}
+.sinais-abas::-webkit-scrollbar{display:none}
+.sinais-aba{position:relative;flex:none;scroll-snap-align:center;min-height:44px;padding:10px 18px;border-radius:999px;border:1.5px solid var(--linha);background:var(--papel);color:var(--ameixa);font:inherit;font-size:var(--t-s);font-weight:700;white-space:nowrap;cursor:pointer;transition:background-color .2s ease, color .2s ease, border-color .2s ease, transform .14s var(--ease-out);touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.sinais-aba:active{transform:scale(.97)}
+.sinais-aba[aria-selected="true"]{background:var(--ameixa);border-color:var(--ameixa);color:var(--creme)}
+/* Barrinha de progresso: é ela que marca os 5 segundos; ao terminar, o site.js passa para a próxima aba.
+   Propriedades separadas (sem o atalho "animation"), para não sobrescrever a pausa abaixo */
+.sinais-progresso{display:none}
+.sinais-troca.girando .sinais-aba[aria-selected="true"] .sinais-progresso{display:block;position:absolute;left:18px;right:18px;bottom:6px;height:2px;border-radius:2px;background:rgba(248,246,237,.7);transform-origin:left;animation-name:nl-progresso;animation-duration:5s;animation-timing-function:linear;animation-fill-mode:forwards}
+.sinais-troca.pausado .sinais-progresso{animation-play-state:paused}
+@keyframes nl-progresso{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.sinais-troca.pronto .sinais-paineis{gap:0}
+.sinais-troca.pronto .sinais-tit{display:none}
+.sinais-troca.pronto .sinais-painel{grid-area:1 / 1;visibility:hidden;opacity:0;transform:translateY(6px);transition:opacity .15s ease, transform .15s ease, visibility 0s .15s}
+.sinais-troca.pronto .sinais-painel.ativo{visibility:visible;opacity:1;transform:none;transition:opacity .3s var(--ease-out) .1s, transform .3s var(--ease-out) .1s, visibility 0s}
+@media (min-width:700px){
+  .sinais-troca.pronto .sinais-abas{flex-wrap:wrap;overflow:visible;margin-inline:0;padding-inline:0;-webkit-mask-image:none;mask-image:none}
+  .motivos{grid-template-columns:1fr 1fr;column-gap:40px}
+}
+
+/* Caminhos: o cartão inteiro é o link para a página do atendimento */
+.caminhos{list-style:none;display:grid;gap:14px}
+.caminho{display:grid;gap:10px;height:100%;padding:22px;border-radius:var(--raio);background:var(--papel);border:1px solid var(--linha);color:var(--texto);text-decoration:none;transition:transform .16s var(--ease-out), border-color .2s ease, box-shadow .25s ease;touch-action:manipulation;-webkit-touch-callout:none}
+.caminho:active{transform:scale(.98)}
+.caminho-cab{display:flex;align-items:center;gap:12px}
+.caminho-ic{width:42px;height:42px;flex:none;border-radius:50%;background:var(--tint-salvia);display:grid;place-items:center}
+.caminho-ic svg{width:24px;height:24px;fill:none;stroke:var(--verde);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.caminho h3{font-size:1.4rem}
+.caminho-desc{font-size:var(--t-s);line-height:1.55}
+.caminho-mais{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:var(--t-s);color:var(--ameixa)}
+.caminho-mais svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s var(--ease-out)}
+.fecho{margin-top:clamp(28px,5vw,40px);font-family:var(--f-display);font-style:italic;font-size:var(--t-xl);color:var(--ameixa);text-align:center;text-wrap:balance}
+@media (min-width:700px){.caminhos{grid-template-columns:repeat(2,1fr);gap:18px}}
+@media (min-width:900px){
+  .caminhos.tres{grid-template-columns:repeat(3,1fr)}
+  .caminho{padding:28px;grid-template-rows:auto auto 1fr auto;gap:12px}
+}
+
+/* Fotos com arco embaixo (Quem sou, Sobre mim) */
+.quem{display:grid;gap:28px;align-items:center}
+.quem .texto{display:grid;gap:16px}
+.foto{margin:0;width:100%;max-width:220px;aspect-ratio:4/5;border-radius:var(--raio) var(--raio) var(--arco) var(--arco);overflow:hidden;background:linear-gradient(170deg,var(--tint-malva),var(--tint-salvia))}
+.foto img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+@media (min-width:900px){
+  .quem{grid-template-columns:.8fr 1.2fr;gap:64px}
+  .foto{max-width:400px}
+}
+
+/* ---------- Abertura das páginas internas ---------- */
+.pagina-topo{background:var(--papel);border-bottom:1px solid var(--linha);padding-block:clamp(24px,5vw,64px) clamp(36px,6vw,72px)}
+.pagina-topo > .cont{display:grid;gap:18px}
+.pagina-topo h1{font-size:clamp(1.9rem, 1.4rem + 2.4vw, 3rem);letter-spacing:-.02em;line-height:1.08;max-width:820px}
+.pagina-topo .sub{max-width:64ch}
+.trilha ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px;font-size:var(--t-xs);font-weight:600;color:var(--malva-texto)}
+.trilha li+li::before{content:"/";margin-right:6px;color:var(--malva)}
+.trilha a{color:var(--malva-texto)}
+.atalhos{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.atalhos a{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--linha);background:var(--creme);font-weight:700;font-size:var(--t-s);text-decoration:none;color:var(--ameixa);transition:border-color .2s ease, background-color .2s ease, transform .14s var(--ease-out);touch-action:manipulation}
+.atalhos a:active{transform:scale(.97)}
+
+/* ---------- Páginas de atendimento ---------- */
+/* Medalhão com o ícone da fase: semente, flor, voo e redoma, o ciclo do dente-de-leão */
+.servico-cab{display:grid;gap:20px;align-items:center}
+.servico-cab .texto{display:grid;gap:16px;min-width:0}
+.servico-cab .acoes{margin-top:6px}
+/* No celular o medalhão sai de cena: quem chega pelo Google precisa ver o botão sem rolar */
+.medalhao{display:none}
+@media (min-width:900px){
+  .servico-cab{grid-template-columns:1fr auto;gap:72px}
+  .medalhao{display:grid;place-items:center;width:240px;height:240px;border-radius:50%;background:linear-gradient(150deg,var(--tint-malva),var(--tint-salvia))}
+  .medalhao svg{width:116px;height:116px;fill:none;stroke:var(--verde);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round}
+}
+.servico-grade{display:grid;gap:32px}
+.leitura{display:grid;gap:36px;min-width:0;max-width:68ch}
+.leitura section{display:grid;gap:12px}
+.leitura h2{font-size:clamp(1.45rem, 1.2rem + .9vw, 1.8rem)}
+.citacao{font-family:var(--f-display);font-style:italic;font-size:1.25rem;color:var(--ameixa);line-height:1.45;padding-left:16px;border-left:2px solid var(--malva)}
+.nota-cruzada{font-size:var(--t-s);background:var(--tint-malva);border-radius:10px;padding:12px 16px}
+/* Resumo: o que a terapia trabalha, como funciona e o botão, num cartão */
+.resumo{display:grid;gap:14px;align-content:start;min-width:0;padding:clamp(22px,3vw,28px);background:var(--papel);border:1px solid var(--linha);border-radius:var(--raio)}
+.resumo .btn{width:100%;margin-top:4px;padding-inline:18px;font-size:var(--t-s)}
+.lista-t{font-weight:700;font-size:var(--t-s);color:var(--ameixa)}
+.lista{list-style:none;display:grid;gap:8px}
+.lista li{font-size:var(--t-s);padding-left:22px;position:relative;line-height:1.5}
+.lista li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:7px;border-left:2px solid var(--salvia-texto);border-bottom:2px solid var(--salvia-texto);transform:rotate(-45deg)}
+.funciona{background:var(--tint-salvia);border-radius:10px;padding:14px 16px;font-size:var(--t-s)}
+.funciona b{color:var(--verde)}
+@media (min-width:900px){
+  .servico-grade{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:56px;align-items:start}
+}
+/* O resumo acompanha a leitura só quando cabe inteiro na tela; em notebooks baixos o botão ficaria escondido */
+@media (min-width:900px) and (min-height:860px){
+  .resumo{position:sticky;top:calc(var(--topo-altura) + 28px)}
+}
+
+/* ---------- Como funciona ---------- */
+.sinais{display:grid;gap:16px}
+.sinal{background:var(--papel);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;display:grid;gap:14px;align-content:start}
+.sinal h3{font-size:1.15rem}
+.sinal ul{list-style:none;display:grid;gap:10px}
+.sinal li{position:relative;padding-left:22px;font-size:var(--t-s);line-height:1.5}
+.sinal li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--salvia-texto)}
+.sinal .link-seta{margin-top:2px}
+.nota-sinal{margin-top:24px;display:grid;gap:16px;justify-items:start}
+@media (min-width:700px){.sinais{grid-template-columns:repeat(2,1fr)}}
+
+.pilares{display:grid;gap:14px;list-style:none;margin-top:8px}
+.pilar{display:grid;grid-template-columns:44px 1fr;gap:4px 14px;padding:18px 0;border-top:1px solid var(--linha)}
+.pilar .n{grid-row:span 2;font-family:var(--f-display);font-size:1.5rem;color:var(--malva-texto);line-height:1.2}
+.pilar h3{font-size:1.15rem}
+.pilar p{font-size:var(--t-s)}
+.subt{font-family:var(--f-display);font-size:var(--t-l);color:var(--ameixa);margin-top:12px}
+
+.etapas{list-style:none;display:grid;counter-reset:etapa}
+.etapa{position:relative;padding:0 0 28px 56px;display:grid;gap:6px}
+.etapa::before{counter-increment:etapa;content:counter(etapa);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--ameixa);color:var(--creme);display:grid;place-items:center;font-family:var(--f-display);font-size:1.15rem}
+.etapa::after{content:"";position:absolute;left:19px;top:44px;bottom:4px;width:2px;background:var(--salvia)}
+.etapa:last-child::after{display:none}
+.etapa h3{font-size:1.2rem;padding-top:6px}
+.etapa p{font-size:var(--t-s)}
+.cta-bloco{display:grid;gap:12px;justify-items:start;margin-top:8px}
+.cta-bloco small{font-size:var(--t-xs)}
+
+.faq{display:grid;gap:10px}
+.faq details{background:var(--papel);border:1px solid var(--linha);border-radius:12px}
+.faq summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:700;color:var(--ameixa);display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:56px;touch-action:manipulation}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:10px;height:10px;border-right:2px solid var(--ameixa);border-bottom:2px solid var(--ameixa);transform:translateY(-2px) rotate(45deg);transition:transform .25s var(--ease-out)}
+.faq details[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.faq details p{padding:0 20px 20px;font-size:var(--t-s)}
+/* Abertura suave onde o navegador permite; nos demais, abre na hora */
+.faq details::details-content{block-size:0;overflow:clip;transition:block-size .28s var(--ease-out), content-visibility .28s allow-discrete}
+.faq details[open]::details-content{block-size:auto}
+
+/* ---------- Sobre mim ---------- */
+.sobre-topo .duas{align-items:center}
+.sobre-topo .texto h1{margin-bottom:4px}
+.credencial{justify-self:start;font-weight:700;font-size:var(--t-s);color:var(--verde);background:var(--tint-salvia);padding:8px 14px;border-radius:8px}
+.linha-tempo{list-style:none;display:grid;gap:12px;border-left:2px solid var(--salvia);padding-left:18px;margin-top:4px}
+.linha-tempo li{position:relative}
+.linha-tempo li::before{content:"";position:absolute;left:-24px;top:.5em;width:10px;height:10px;border-radius:50%;background:var(--creme);border:2px solid var(--salvia-texto)}
+
+.simbolo{display:grid;gap:18px}
+.simbolo-topo{display:grid;gap:24px;align-items:center}
+.simbolo-topo .intro{margin-bottom:0}
+.simbolo-ilus{width:min(260px,70%);height:auto;aspect-ratio:78/49;fill:var(--ameixa)}
+.simbolo-itens{list-style:none;display:grid;gap:14px;margin-top:8px}
+.simbolo-itens li{background:var(--creme);border-radius:var(--raio);padding:20px;border:1px solid var(--linha)}
+.simbolo-itens b{font-family:var(--f-display);font-size:1.15rem;font-weight:500;color:var(--ameixa);display:block;margin-bottom:6px}
+.simbolo-itens p{font-size:var(--t-s)}
+.lema{font-family:var(--f-display);font-style:italic;font-size:var(--t-xl);color:var(--ameixa);text-align:center;margin-top:24px}
+@media (min-width:820px){
+  .simbolo-topo{grid-template-columns:300px 1fr;gap:48px}
+  .simbolo-ilus{width:100%}
+  .simbolo-itens{grid-template-columns:repeat(3,1fr)}
+}
+
+.cartilhas{list-style:none;display:grid;gap:14px}
+.cartilha{display:grid;gap:10px;height:100%;padding:22px;border-radius:var(--raio);background:var(--papel);border:1px solid var(--linha);align-content:start}
+.cartilha h3{font-size:1.15rem}
+.cartilha p{font-size:var(--t-s)}
+.em-breve{justify-self:start;font-size:var(--t-xs);font-weight:700;color:var(--malva-texto);border:1px dashed var(--malva);padding:6px 12px;border-radius:999px;margin-top:4px}
+.insta{margin-top:24px;font-size:var(--t-s)}
+@media (min-width:640px){.cartilhas{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.cartilhas{grid-template-columns:repeat(4,1fr)}}
+
+/* Política de privacidade */
+.pol{display:grid;gap:14px}
+.pol h2{font-size:1.3rem;margin-top:14px}
+.pol p{font-size:var(--t-s);line-height:1.7}
+
+/* ---------- Rodapé compartilhado ---------- */
+.rodape{background:var(--verde) url("assets/padrao-flor.svg") repeat;background-size:132px;color:var(--creme)}
+.rodape-corpo{display:grid;gap:24px;padding-block:clamp(40px,6vw,64px) 28px}
+.rodape h2{color:var(--creme);font-size:clamp(1.45rem, 1.15rem + 1.2vw, 1.9rem)}
+.rodape .rotulo{color:var(--salvia-clara)}
+.rodape .rotulo svg{stroke:var(--salvia-clara)}
+.rodape .rotulo .sep{color:var(--salvia-clara)}
+.rodape-cta{display:grid;gap:18px;justify-items:start}
+.rodape-msg{display:grid;gap:12px}
+.rodape-msg p{max-width:56ch;font-size:var(--t-s)}
+.contatos{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;border-block:1px solid rgba(248,246,237,.22);padding-block:18px}
+.contatos li{display:grid;gap:2px;font-size:var(--t-s);min-width:0}
+.contatos .largo{grid-column:1 / -1}
+.contatos span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--salvia-clara);font-weight:700}
+.contatos a{color:var(--creme);font-weight:600;overflow-wrap:anywhere}
+.aviso{font-size:var(--t-xs);line-height:1.6;color:var(--salvia-clara);max-width:780px}
+.aviso a{color:var(--creme)}
+.rodape-base{background:var(--verde-escuro);font-size:var(--t-xs)}
+.rodape-base .cont{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding-block:16px calc(16px + env(safe-area-inset-bottom,0px))}
+.rodape-base a{color:var(--creme)}
+@media (min-width:900px){
+  .rodape-cta{grid-template-columns:1fr auto;align-items:end;column-gap:48px}
+  .contatos{grid-template-columns:repeat(5,auto);justify-content:space-between}
+  .contatos .largo{grid-column:auto}
+}
+
+/* WhatsApp flutuante: escondido enquanto outro botão de WhatsApp está na tela (ver [data-sem-flutuante]) */
+.flutuante{position:fixed;z-index:40;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:12px 20px 12px 16px;border-radius:999px;background:var(--verde);color:var(--creme);font-weight:700;text-decoration:none;box-shadow:0 10px 28px -8px rgba(57,81,53,.6);transition:opacity .25s var(--ease-out), transform .25s var(--ease-out), background-color .2s ease;touch-action:manipulation;-webkit-touch-callout:none}
+.flutuante svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.flutuante:active{transform:scale(.96)}
+.flutuante.recolhido{opacity:0;transform:translateY(16px);pointer-events:none}
+
+/* Aviso de cookies (só aparece se o Analytics for ativado) */
+.cookies{position:fixed;z-index:70;left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:560px;margin-inline:auto;background:var(--papel);color:var(--texto);border:1px solid var(--linha);border-radius:var(--raio);padding:18px;box-shadow:0 18px 40px -16px rgba(78,56,72,.45);display:grid;gap:12px;font-size:var(--t-s)}
+.cookies .btn{min-height:44px;padding:10px 18px;font-size:var(--t-s)}
+
+/* Estados de mouse: isolados para que o toque no celular não deixe a cor "presa" */
+@media (hover:hover) and (pointer:fine){
+  .btn-pri:hover{background:var(--ameixa-escura)}
+  .btn-sec:hover{background:var(--tint-malva)}
+  .btn-claro:hover{background:#fff}
+  .link-seta:hover span{text-decoration-color:currentColor}
+  .link-seta:hover svg{transform:translateX(3px)}
+  .link-seta.baixo:hover svg{transform:translateY(3px)}
+  .nav a:hover,.nav-sub-btn:hover{background:var(--tint-malva)}
+  .caminho:hover{border-color:var(--salvia);box-shadow:0 22px 40px -28px rgba(78,56,72,.45)}
+  .caminho:hover .caminho-mais svg{transform:translateX(4px)}
+  .atalhos a:hover,.sinais-aba:hover:not([aria-selected="true"]){border-color:var(--malva);background:var(--tint-malva)}
+  .faq summary:hover{color:var(--ameixa-escura)}
+  .flutuante:hover{background:var(--verde-escuro)}
+}
+
+/* Revelação ao rolar: classes adicionadas pelo site.js; sem JS, tudo aparece normalmente */
+.anima{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease-out), transform .5s var(--ease-out)}
+.anima.vis{opacity:1;transform:none}
+
+/* Troca entre páginas com um cruzamento curto, onde o navegador oferece */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:cubic-bezier(.23,1,.32,1)}
+
+/* Menos movimento: tira deslocamentos e escalas, mantém mudanças de cor */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn:active,.caminho:active,.atalhos a:active,.sinais-aba:active,.flutuante:active,.flutuante.recolhido{transform:none}
+  .sinais-troca.pronto .sinais-painel{transform:none;transition:none}
+  .nav,.nav-sub{transform:none!important}
+  .link-seta svg,.caminho-mais svg{transform:none!important}
+  .nav-sub-btn svg{transition:none}
+  .anima{opacity:1!important;transform:none!important;transition:none!important}
+  .faq summary::after{transition:none}
+  .faq details::details-content{transition:none}
+  @view-transition{navigation:none}
+}
+@media (prefers-reduced-transparency:reduce){
+  .topo{background:var(--creme);-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (prefers-contrast:more){
+  :root{--linha:#9C9488}
+}
