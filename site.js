@@ -131,6 +131,15 @@
       troca.addEventListener("focusin", function(){ troca.classList.remove("girando"); });
       atualizar();
     }
+
+    // Chegando por #sinais-infantil, #sinais-adolescentes etc. (links das páginas de atendimento):
+    // abre a aba daquele público e para a troca automática
+    var abrirPorEndereco = function(){
+      var n = abas.indexOf(location.hash ? document.getElementById(location.hash.slice(1)) : null);
+      if (n !== -1) { mostrarAba(n); fixar(); }
+    };
+    abrirPorEndereco();
+    window.addEventListener("hashchange", abrirPorEndereco);
   }
 
   // Revelação suave ao rolar. O que já está na tela ao carregar fica parado,
