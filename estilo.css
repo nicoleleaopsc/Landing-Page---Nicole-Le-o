@@ -366,7 +366,7 @@ ul,ol{margin:0;padding:0}
 /* Por que um dente-de-leão: símbolo no alto, etiqueta e título centralizados, parágrafos à esquerda */
 .simbolo{display:grid;gap:24px}
 .simbolo-circ{justify-self:center;width:220px;height:220px;border-radius:50%;background:var(--papel);display:grid;place-items:center}
-.simbolo-ilus{width:160px;height:auto;aspect-ratio:78/49;fill:var(--ameixa)}
+.simbolo-ilus{width:100%;height:auto}
 .simbolo-intro{display:grid;gap:14px;max-width:680px;justify-self:center}
 .simbolo-intro .rotulo{justify-self:center}
 .simbolo-intro h2{text-align:center}
@@ -378,7 +378,6 @@ ul,ol{margin:0;padding:0}
 .lema{font-family:var(--f-display);font-style:italic;font-size:var(--t-xl);color:var(--ameixa);text-align:center;margin-top:8px}
 @media (min-width:900px){
   .simbolo-circ{width:320px;height:320px}
-  .simbolo-ilus{width:240px}
   .simbolo-itens{grid-template-columns:repeat(3,1fr)}
 }
 
