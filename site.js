@@ -65,14 +65,15 @@
     if (!temIO || !cobertos.length) {
       mostrar(true);
     } else {
-      var naTela = [];
+      // Nome próprio de propósito: com "var", tudo divide o mesmo escopo, e as abas de sinais já usam "naTela"
+      var botoesNaTela = [];
       var obsFlut = new IntersectionObserver(function(entradas){
         entradas.forEach(function(e){
-          var i = naTela.indexOf(e.target);
-          if (e.intersectionRatio >= 0.2 && i === -1) naTela.push(e.target);
-          if (e.intersectionRatio < 0.2 && i !== -1) naTela.splice(i, 1);
+          var i = botoesNaTela.indexOf(e.target);
+          if (e.intersectionRatio >= 0.2 && i === -1) botoesNaTela.push(e.target);
+          if (e.intersectionRatio < 0.2 && i !== -1) botoesNaTela.splice(i, 1);
         });
-        mostrar(naTela.length === 0);
+        mostrar(botoesNaTela.length === 0);
       }, { threshold: [0, 0.2] });
       cada(cobertos, function(el){ obsFlut.observe(el); });
     }
