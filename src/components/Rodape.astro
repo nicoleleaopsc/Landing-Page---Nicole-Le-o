@@ -1,0 +1,41 @@
+---
+// Rodapé comum a todas as páginas: convite final, contatos, aviso de urgência e linha de crédito.
+// O aviso de cookies fica aqui, escondido; ele só aparece se o Google Analytics for ativado (GA_ID em data/site.ts).
+import WhatsApp from "./WhatsApp.astro";
+import { CONTATO, MARCA } from "../data/site";
+---
+
+<footer class="rodape" id="contato" data-sem-flutuante>
+  <div class="cont rodape-corpo">
+    <div class="rodape-cta">
+      <div class="rodape-msg">
+        <p class="rotulo fio"><span class="fio-ic" aria-hidden="true"><svg class="ic-largo"><use href="#l-sementes" /></svg></span>Voo <span class="sep">·</span> Próximo passo</p>
+        <h2>Quando sentir que é o momento, estarei aqui.</h2>
+        <p>Como as sementes que o vento leva, cada processo encontra o seu próprio rumo. Meu desejo é acompanhar o seu, com escuta, ciência e afeto.</p>
+      </div>
+      <WhatsApp class="btn btn-claro" msg="geral" origem="rodape" icone>Conversar pelo WhatsApp</WhatsApp>
+    </div>
+    <ul class="contatos">
+      <li><span>WhatsApp</span><WhatsApp msg="geral" origem="contatos">{CONTATO.telefoneExibido}</WhatsApp></li>
+      <li><span>Instagram</span><a href={CONTATO.instagram} target="_blank" rel="noopener">{CONTATO.instagramExibido}</a></li>
+      <li class="largo"><span>E-mail</span><a href={`mailto:${CONTATO.email}`}>{CONTATO.email}</a></li>
+      <li><span>Horário</span>{CONTATO.horario}</li>
+      <li><span>Onde</span>{CONTATO.onde}</li>
+    </ul>
+    <p class="aviso">Este espaço é dedicado ao acompanhamento psicológico com horário agendado e não funciona como atendimento de urgência. Se você ou alguém próximo estiver passando por um momento de sofrimento intenso ou de risco, procure ajuda imediata: CVV, pelo telefone <a href="tel:188">188</a> (gratuito, 24 horas), ou SAMU, pelo <a href="tel:192">192</a>. Cuidar também é saber pedir ajuda na hora certa.</p>
+  </div>
+  <div class="rodape-base">
+    <div class="cont">
+      <span>{MARCA} · {CONTATO.crp}</span>
+      <a href="/privacidade/">Política de privacidade</a>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+<div class="cookies" id="cookies" role="dialog" aria-label="Aviso de cookies" hidden>
+  <p>Usamos cookies de análise para entender como o site é usado. Você pode aceitar ou recusar. Detalhes na <a href="/privacidade/">política de privacidade</a>.</p>
+  <div class="acoes">
+    <button class="btn btn-pri" type="button" id="cookies-aceitar">Aceitar</button>
+    <button class="btn btn-sec" type="button" id="cookies-recusar">Recusar</button>
+  </div>
+</div>

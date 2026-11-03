@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import Caminhos from "../components/Caminhos.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+import { schemaServico } from "../lib/schema";
+---
+
+<Base
+  titulo="Psicoterapia para adolescentes em Maceió e online | Nicole Leão"
+  descricao="Terapia para adolescentes em Maceió e online: um espaço seguro e sigiloso para lidar com emoções, autoestima e autocobrança. Agende pelo WhatsApp."
+  ogTitulo="Psicoterapia para adolescentes · Nicole Leão"
+  ogDescricao="Um espaço seguro e sigiloso, só seu, para falar do que sente sem julgamentos e construir o próprio caminho."
+  jsonld={schemaServico("adolescentes", "Psicoterapia para adolescentes com Terapia Cognitivo-Comportamental, presencial em Maceió ou online a partir dos 15 anos.")}
+  flutuante="adolescentes"
+>
+  <section class="pagina-topo" id="inicio" aria-labelledby="titulo-pagina">
+    <div class="cont">
+      <nav class="trilha" aria-label="Você está em">
+        <ol><li><a href="/">Início</a></li><li aria-current="page">Psicoterapia para adolescentes</li></ol>
+      </nav>
+      <div class="servico-cab">
+        <div class="texto">
+          <h1 id="titulo-pagina">Psicoterapia para adolescentes</h1>
+          <p class="sub">A adolescência é um tempo de reorganização: de quem se é, do que se quer e de como se deseja ser visto. É também a ponte para a vida adulta, em que a busca por autonomia convive com cobranças internas, o medo de decepcionar e dúvidas sobre o próprio caminho. A terapia oferece escuta, sigilo e método para que o adolescente construa, no seu ritmo, formas mais flexíveis e seguras de seguir.</p>
+          <div class="acoes">
+            <WhatsApp class="btn btn-pri" msg="adolescentes" origem="topo-adolescentes" icone>Agendar pelo WhatsApp</WhatsApp>
+            <a class="link-seta baixo" href="#sobre-o-atendimento"><span>Entender o atendimento</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
+          </div>
+          <ul class="chips" aria-label="Formato do atendimento">
+            <li class="chip">Presencial em Maceió</li>
+            <li class="chip">Online a partir dos 15 anos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" id="sobre-o-atendimento" aria-label="Sobre a psicoterapia para adolescentes">
+    <div class="cont servico-grade">
+      <article class="leitura">
+        <section class="revela" aria-labelledby="t-oque">
+          <p class="rotulo">Na adolescência</p>
+          <h2 id="t-oque">O que é a psicoterapia para adolescentes</h2>
+          <p>A adolescência é uma fase de muitas mudanças ao mesmo tempo: no corpo, nas emoções, nas amizades e no lugar que se ocupa na família. Nas sessões, ofereço ao adolescente um espaço seguro e sigiloso, só seu, para falar do que sente sem julgamentos, compreender o que pensa e como reage, e construir o próprio caminho.</p>
+        </section>
+        <section class="revela" aria-labelledby="t-importa">
+          <h2 id="t-importa">Por que é importante</h2>
+          <p>Nessa fase, a busca por autonomia convive com cobranças, comparações e a necessidade de pertencer e de ser valorizado. Quando essas necessidades encontram pouco espaço para serem ditas e acolhidas, podem se transformar em um olhar mais duro sobre si mesmo. Ter alguém que escute com atenção e ofereça ferramentas práticas contribui para fortalecer a autoestima, lidar com as emoções e tomar decisões com mais segurança, favorecendo a resolução de problemas e o estabelecimento da autoeficácia.</p>
+        </section>
+      </article>
+      <aside class="resumo" aria-label="Resumo do atendimento">
+        <p class="lista-t">A terapia pode auxiliar a:</p>
+        <ul class="lista">
+          <li>Compreender e acolher as próprias emoções</li>
+          <li>Construir uma autoestima mais firme, menos dependente da aprovação dos outros</li>
+          <li>Lidar com a autocobrança</li>
+          <li>Reencontrar motivação e organização para os estudos e os projetos</li>
+          <li>Tomar decisões com mais segurança</li>
+        </ul>
+        <p class="funciona"><b>Como funciona:</b> o primeiro encontro é com os pais, para conhecer a história, a rotina e o que motivou a busca. Depois, as sessões semanais de 50 minutos acontecem com o adolescente, presenciais ou online (a partir dos 15 anos), e a família recebe devolutivas periódicas, preservando o espaço de confiança do filho.</p>
+        <WhatsApp class="btn btn-pri" msg="adolescentes" origem="resumo-adolescentes">Quero saber mais sobre a terapia</WhatsApp>
+        <a class="link-seta" href="/#sinais-adolescentes" data-caminho="sinais-adolescentes"><span>Quando procurar ajuda</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="faixa malva" aria-labelledby="titulo-outros">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo">Outros atendimentos</p>
+        <h2 id="titulo-outros">Cuidar de quem chega é também cuidar dos vínculos que o sustentam.</h2>
+      </div>
+      <Caminhos exceto="adolescentes" />
+    </div>
+  </section>
+</Base>

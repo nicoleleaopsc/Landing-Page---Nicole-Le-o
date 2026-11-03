@@ -1,0 +1,102 @@
+---
+// Cabeçalho fixo com a marca e a navegação. No celular, o botão do menu vem antes da <nav> no código,
+// para que o Tab (e o leitor de tela) entre nos links logo depois de abrir o menu.
+import { CONTATO, SERVICOS } from "../data/site";
+
+const atual = Astro.url.pathname;
+const emServico = SERVICOS.some((s) => s.url === atual);
+const marcaAtual = (href: string) => (href === atual ? "page" : undefined);
+---
+
+<header class="topo">
+  <div class="cont">
+    {/* LOGO-01 da designer (símbolo + nome), num arquivo à parte para o navegador guardar em cache entre as páginas */}
+    <a class="marca" href="/">
+      <img class="marca-logo" src="/assets/logo-horizontal.svg" width="178" height="60" alt={`${CONTATO.nome}, ${CONTATO.profissao}`} decoding="async" />
+    </a>
+    <div class="topo-acoes">
+      <button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" id="menu-btn">
+        <span class="sr-only">Menu</span>
+        <svg class="ic-abrir" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        <svg class="ic-fechar" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+      </button>
+    </div>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <ul class="nav-lista">
+        <li><a href="/" aria-current={marcaAtual("/")}>Início</a></li>
+        <li class:list={["nav-grupo", { atual: emServico }]}>
+          <span class="nav-rotulo" aria-hidden="true">Atendimentos</span>
+          <button class="nav-sub-btn" type="button" aria-expanded="false" aria-controls="nav-atendimentos">Atendimentos<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <ul class="nav-sub" id="nav-atendimentos" aria-label="Atendimentos">
+            {SERVICOS.map((s) => <li><a href={s.url} aria-current={marcaAtual(s.url)}>{s.titulo}</a></li>)}
+          </ul>
+        </li>
+        <li><a href="/como-funciona/" aria-current={marcaAtual("/como-funciona/")}>Como funciona</a></li>
+        <li><a href="/sobre/" aria-current={marcaAtual("/sobre/")}>Sobre mim</a></li>
+        <li><a href="/como-funciona/#duvidas">Dúvidas</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Menu do celular
+  const botao = document.getElementById("menu-btn");
+  const nav = document.getElementById("nav");
+  if (botao && nav) {
+    const fecharMenu = () => {
+      nav.classList.remove("aberto");
+      botao.setAttribute("aria-expanded", "false");
+    };
+    botao.addEventListener("click", () => {
+      const aberto = nav.classList.toggle("aberto");
+      botao.setAttribute("aria-expanded", aberto ? "true" : "false");
+    });
+    nav.addEventListener("click", (e) => {
+      if (e.target instanceof Element && e.target.closest("a")) fecharMenu();
+    });
+    document.addEventListener("click", (e) => {
+      if (nav.classList.contains("aberto") && e.target instanceof Element && !e.target.closest(".topo")) fecharMenu();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.classList.contains("aberto")) {
+        fecharMenu();
+        botao.focus();
+      }
+    });
+  }
+
+  // Submenu "Atendimentos" no computador: abre no clique, fecha com Esc, clique fora ou quando o foco sai dele
+  const grupo = document.querySelector<HTMLElement>(".nav-grupo");
+  const subBotao = grupo?.querySelector<HTMLButtonElement>(".nav-sub-btn");
+  if (grupo && subBotao) {
+    const fecharSub = () => {
+      grupo.classList.remove("aberto");
+      subBotao.setAttribute("aria-expanded", "false");
+    };
+    subBotao.addEventListener("click", () => {
+      const aberto = grupo.classList.toggle("aberto");
+      subBotao.setAttribute("aria-expanded", aberto ? "true" : "false");
+    });
+    document.addEventListener("click", (e) => {
+      if (grupo.classList.contains("aberto") && e.target instanceof Node && !grupo.contains(e.target)) fecharSub();
+    });
+    grupo.addEventListener("focusout", (e) => {
+      if (e.relatedTarget instanceof Node && !grupo.contains(e.relatedTarget)) fecharSub();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && grupo.classList.contains("aberto")) {
+        fecharSub();
+        subBotao.focus();
+      }
+    });
+  }
+
+  // Cabeçalho fixo: a borda e a sombra só aparecem quando há conteúdo passando por baixo
+  const topo = document.querySelector(".topo");
+  if (topo) {
+    const marcarTopo = () => topo.classList.toggle("rolado", window.scrollY > 4);
+    window.addEventListener("scroll", marcarTopo, { passive: true });
+    marcarTopo();
+  }
+</script>

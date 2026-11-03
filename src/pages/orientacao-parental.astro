@@ -1,0 +1,78 @@
+---
+import Base from "../layouts/Base.astro";
+import Caminhos from "../components/Caminhos.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+import { schemaServico } from "../lib/schema";
+---
+
+<Base
+  titulo="Orientação parental em Maceió e online | Psicóloga Nicole Leão"
+  descricao="Orientação parental para mães, pais e cuidadores em Maceió e online: compreender cada fase do filho e construir limites com afeto. Agende pelo WhatsApp."
+  ogTitulo="Orientação parental · Nicole Leão"
+  ogDescricao="Compreensão e ferramentas para os desafios de cada fase do seu filho, com ou sem ele em terapia."
+  jsonld={schemaServico("parental", "Orientação para mães, pais e cuidadores sobre o desenvolvimento emocional dos filhos, presencial em Maceió ou online.")}
+  flutuante="parental"
+>
+  <section class="pagina-topo" id="inicio" aria-labelledby="titulo-pagina">
+    <div class="cont">
+      <nav class="trilha" aria-label="Você está em">
+        <ol><li><a href="/">Início</a></li><li aria-current="page">Orientação parental</li></ol>
+      </nav>
+      <div class="servico-cab">
+        <div class="texto">
+          <h1 id="titulo-pagina">Orientação parental</h1>
+          <p class="sub">Pais não precisam de respostas prontas, e sim de compreensão e de ferramentas. A orientação parental é um espaço dedicado a vocês, com ou sem o filho em terapia, para entender o que a criança ou o adolescente expressa pelo comportamento, rever padrões que se repetem na rotina e encontrar o equilíbrio entre firmeza e afeto.</p>
+          <div class="acoes">
+            <WhatsApp class="btn btn-pri" msg="parental" origem="topo-parental" icone>Agendar pelo WhatsApp</WhatsApp>
+            <a class="link-seta baixo" href="#sobre-o-atendimento"><span>Entender o atendimento</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
+          </div>
+          <ul class="chips" aria-label="Formato do atendimento">
+            <li class="chip">Presencial em Maceió</li>
+            <li class="chip">Online</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" id="sobre-o-atendimento" aria-label="Sobre a orientação parental">
+    <div class="cont servico-grade">
+      <article class="leitura">
+        <p class="citacao revela">Educar com consciência não é acertar sempre. É repetir menos as dores que vieram antes e construir algo diferente para quem vem depois.</p>
+        <section class="revela" aria-labelledby="t-oque">
+          <p class="rotulo">Para pais e cuidadores</p>
+          <h2 id="t-oque">O que é a orientação parental</h2>
+          <p>A orientação parental é para mães, pais e outros cuidadores, em qualquer arranjo familiar, e pode ser buscada tanto no dia a dia quanto em momentos de transição, como a chegada de um irmão, uma mudança de escola, uma separação ou a entrada do filho na adolescência. Nos encontros, ajudo os pais a compreenderem o momento do desenvolvimento em que o filho está, o que é esperado para a idade e quais necessidades emocionais estão em jogo. A partir disso, construímos juntos estratégias ajustadas à realidade de cada família.</p>
+        </section>
+        <section class="revela" aria-labelledby="t-importa">
+          <h2 id="t-importa">Por que é importante</h2>
+          <p>Crianças e adolescentes aprendem a lidar com as próprias emoções, em grande parte, convivendo com quem cuida deles. Esse vínculo muda de forma a cada fase: na infância, pede proximidade, segurança e orientação; na adolescência, abre espaço para mais autonomia, sem dispensar a presença e a referência dos pais. Quando os pais se sentem mais seguros e compreendidos, a relação ganha estabilidade e confiança, e isso se reflete no desenvolvimento dos filhos. Pequenas mudanças na forma de se relacionar podem ter um efeito significativo na rotina da família.</p>
+        </section>
+      </article>
+      <aside class="resumo" aria-label="Resumo do atendimento">
+        <p class="lista-t">A orientação pode auxiliar a:</p>
+        <ul class="lista">
+          <li>Compreender as necessidades emocionais de cada fase</li>
+          <li>Estabelecer limites claros, com coerência e afeto</li>
+          <li>Criar rotinas previsíveis e combinados possíveis de cumprir</li>
+          <li>Acolher as emoções do filho sem deixar de orientar</li>
+          <li>Reduzir o desgaste e fortalecer a parceria entre os cuidadores</li>
+        </ul>
+        {/* PENDENTE: confirmar com a Nicole a duração das sessões de orientação parental */}
+        <p class="funciona"><b>Como funciona:</b> encontros com os pais ou responsáveis, presenciais ou online, com frequência combinada conforme a necessidade da família.</p>
+        <WhatsApp class="btn btn-pri" msg="parental" origem="resumo-parental">Quero orientação parental</WhatsApp>
+        <a class="link-seta" href="/#sinais-parental" data-caminho="sinais-parental"><span>Quando procurar ajuda</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="faixa malva" aria-labelledby="titulo-outros">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo">Outros atendimentos</p>
+        <h2 id="titulo-outros">Cuidar de quem chega é também cuidar dos vínculos que o sustentam.</h2>
+      </div>
+      <Caminhos exceto="parental" />
+    </div>
+  </section>
+</Base>

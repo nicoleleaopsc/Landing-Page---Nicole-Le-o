@@ -1,0 +1,46 @@
+---
+// Botão flutuante de WhatsApp. Some sempre que outro botão de WhatsApp já está na tela
+// (qualquer elemento com data-sem-flutuante: os botões do texto e o rodapé), para nunca haver dois iguais à vista.
+import { linkWhatsApp, type ChaveMensagem } from "../data/site";
+
+interface Props {
+  /** Mensagem pronta: nas páginas de atendimento, a do público da página */
+  msg?: ChaveMensagem;
+}
+
+const { msg = "geral" } = Astro.props;
+---
+
+<a class="flutuante recolhido" href={linkWhatsApp(msg)} target="_blank" rel="noopener" data-origem="flutuante" aria-label="Conversar com a Nicole pelo WhatsApp" tabindex="-1" aria-hidden="true">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-msg" /></svg>WhatsApp
+</a>
+
+<script>
+  const flutuante = document.querySelector<HTMLAnchorElement>(".flutuante");
+  const cobertos = document.querySelectorAll("[data-sem-flutuante]");
+  if (flutuante) {
+    const mostrar = (sim: boolean) => {
+      flutuante.classList.toggle("recolhido", !sim);
+      flutuante.tabIndex = sim ? 0 : -1;
+      if (sim) flutuante.removeAttribute("aria-hidden");
+      else flutuante.setAttribute("aria-hidden", "true");
+    };
+    if (!("IntersectionObserver" in window) || !cobertos.length) {
+      mostrar(true);
+    } else {
+      // Conta como "na tela" a partir de 20% visível
+      const naTela = new Set<Element>();
+      const observador = new IntersectionObserver(
+        (entradas) => {
+          for (const e of entradas) {
+            if (e.intersectionRatio >= 0.2) naTela.add(e.target);
+            else naTela.delete(e.target);
+          }
+          mostrar(naTela.size === 0);
+        },
+        { threshold: [0, 0.2] },
+      );
+      cobertos.forEach((el) => observador.observe(el));
+    }
+  }
+</script>

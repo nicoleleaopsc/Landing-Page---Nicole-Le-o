@@ -1,0 +1,138 @@
+---
+// Sinais de que vale procurar ajuda, um painel por público. As abas alternam sozinhas e param de vez quando
+// a pessoa escolhe uma. O id de cada aba é a âncora pública (#sinais-infantil etc.), usada pelas páginas de atendimento.
+import { SERVICOS, SINAIS, linkWhatsApp } from "../data/site";
+
+const conhecer = (titulo: string) => `Conhecer a ${titulo[0]!.toLowerCase()}${titulo.slice(1)}`;
+---
+
+<div class="sinais-troca revela" data-sinais>
+  <div class="sinais-abas" role="tablist" aria-label="Sinais por público">
+    {
+      SERVICOS.map((s, n) => (
+        <button
+          class="sinais-aba"
+          type="button"
+          role="tab"
+          id={`sinais-${s.chave}`}
+          aria-controls={`painel-${s.chave}`}
+          aria-selected={n === 0 ? "true" : "false"}
+          tabindex={n === 0 ? undefined : "-1"}
+          data-wa={linkWhatsApp(s.chave)}
+        >
+          {s.nome}<span class="sinais-progresso" aria-hidden="true"></span>
+        </button>
+      ))
+    }
+  </div>
+  <div class="sinais-paineis">
+    {
+      SERVICOS.map((s, n) => (
+        <div class:list={["sinais-painel", { ativo: n === 0 }]} id={`painel-${s.chave}`} role="tabpanel" aria-labelledby={`sinais-${s.chave}`}>
+          <h3 class="sinais-tit">{SINAIS[s.chave].titulo}</h3>
+          <ul class="motivos">
+            {SINAIS[s.chave].itens.map((t) => <li><svg aria-hidden="true"><use href="#i-pappus" /></svg><span>{t}</span></li>)}
+          </ul>
+          <a class="link-seta" href={s.url} data-caminho={`sinais-${s.chave}`}><span>{conhecer(s.titulo)}</span><svg aria-hidden="true"><use href="#i-seta" /></svg></a>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  // O tempo de cada aba é a própria animação da barrinha de progresso (5s no CSS): ao terminar, avança.
+  const troca = document.querySelector<HTMLElement>("[data-sinais]");
+  const faixaAbas = troca?.querySelector<HTMLElement>('[role="tablist"]');
+  if (troca && faixaAbas) {
+    const abas = Array.from(troca.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const botaoWA = document.querySelector<HTMLAnchorElement>("[data-wa-publico]");
+    const reduzMov = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let atual = 0;
+
+    const mostrarAba = (i: number, focar = false) => {
+      atual = (i + abas.length) % abas.length;
+      abas.forEach((aba, n) => {
+        const sel = n === atual;
+        aba.setAttribute("aria-selected", sel ? "true" : "false");
+        aba.tabIndex = sel ? 0 : -1;
+        document.getElementById(aba.getAttribute("aria-controls") ?? "")?.classList.toggle("ativo", sel);
+      });
+      const aba = abas[atual]!;
+      if (focar) aba.focus();
+      // No celular as abas rolam de lado: centraliza a ativa sem mexer na rolagem da página
+      faixaAbas.scrollTo({
+        left: aba.offsetLeft - (faixaAbas.clientWidth - aba.offsetWidth) / 2,
+        behavior: reduzMov.matches ? "auto" : "smooth",
+      });
+    };
+
+    // Quando a pessoa escolhe, a rotação para e o botão de WhatsApp passa a falar daquele público
+    const fixar = () => {
+      troca.classList.remove("girando");
+      const wa = abas[atual]!.getAttribute("data-wa");
+      if (botaoWA && wa) botaoWA.href = wa;
+    };
+
+    abas.forEach((aba, n) => {
+      aba.addEventListener("click", () => {
+        mostrarAba(n);
+        fixar();
+      });
+    });
+    faixaAbas.addEventListener("keydown", (e) => {
+      const destino = ({ ArrowRight: atual + 1, ArrowLeft: atual - 1, Home: 0, End: abas.length - 1 } as Record<string, number>)[e.key];
+      if (destino === undefined) return;
+      e.preventDefault();
+      mostrarAba(destino, true);
+      fixar();
+    });
+    troca.classList.add("pronto");
+
+    if (!reduzMov.matches) {
+      troca.classList.add("girando", "pausado");
+      faixaAbas.addEventListener("animationend", (e) => {
+        if (e.animationName === "nl-progresso" && troca.classList.contains("girando")) mostrarAba(atual + 1);
+      });
+      // Só corre com a seção na tela, sem o mouse em cima e com a aba do navegador visível
+      let secaoNaTela = !("IntersectionObserver" in window);
+      let mouseEmCima = false;
+      const atualizar = () => troca.classList.toggle("pausado", !secaoNaTela || mouseEmCima || document.hidden);
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(
+          (ent) => {
+            secaoNaTela = ent[0]!.isIntersecting;
+            atualizar();
+          },
+          { threshold: 0.5 },
+        ).observe(troca);
+      }
+      troca.addEventListener("mouseenter", () => {
+        mouseEmCima = true;
+        atualizar();
+      });
+      troca.addEventListener("mouseleave", () => {
+        mouseEmCima = false;
+        atualizar();
+      });
+      document.addEventListener("visibilitychange", atualizar);
+      // Tocar para rolar as abas ou entrar com o teclado também entrega o controle à pessoa
+      faixaAbas.addEventListener("pointerdown", () => troca.classList.remove("girando"));
+      troca.addEventListener("focusin", () => troca.classList.remove("girando"));
+      atualizar();
+    }
+
+    // Chegando por #sinais-infantil, #sinais-adolescentes etc. (links das páginas de atendimento):
+    // abre a aba daquele público e para a troca automática
+    const abrirPorEndereco = () => {
+      const alvo = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+      const n = abas.findIndex((aba) => aba === alvo);
+      if (n !== -1) {
+        mostrarAba(n);
+        fixar();
+      }
+    };
+    abrirPorEndereco();
+    window.addEventListener("hashchange", abrirPorEndereco);
+  }
+</script>

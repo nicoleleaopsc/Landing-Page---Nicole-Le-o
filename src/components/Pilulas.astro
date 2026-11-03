@@ -1,0 +1,8 @@
+---
+// Atalhos em linha para as páginas de atendimento
+import { SERVICOS } from "../data/site";
+---
+
+<ul class="pilulas">
+  {SERVICOS.map((s) => <li><a href={s.url} data-caminho={`pilula-${s.chave}`}>{s.nome}<svg aria-hidden="true"><use href="#i-seta" /></svg></a></li>)}
+</ul>

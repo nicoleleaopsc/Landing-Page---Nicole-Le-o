@@ -1,0 +1,26 @@
+---
+// Cartões "Para quem é o cuidado": um por atendimento, levando à página de cada um.
+// Nas páginas de atendimento, "exceto" tira o cartão da própria página (e a grade passa a ter três colunas).
+import { SERVICOS, type ChaveServico } from "../data/site";
+
+interface Props {
+  exceto?: ChaveServico;
+}
+
+const { exceto } = Astro.props;
+const itens = SERVICOS.filter((s) => s.chave !== exceto);
+---
+
+<ul class:list={["caminhos", { tres: itens.length === 3 }]} data-cascata>
+  {
+    itens.map((s) => (
+      <li class="revela">
+        <a class="caminho" href={s.url} data-caminho={s.chave}>
+          <h3>{s.nome}</h3>
+          <span class="caminho-desc">{s.desc}</span>
+          <span class="caminho-mais">Saiba mais<svg aria-hidden="true"><use href="#i-seta" /></svg></span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

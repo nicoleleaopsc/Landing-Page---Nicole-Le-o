@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import Caminhos from "../components/Caminhos.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+import { schemaServico } from "../lib/schema";
+---
+
+<Base
+  titulo="Psicoterapia para jovens adultos em Maceió e online | Nicole Leão"
+  descricao="Terapia para jovens adultos em Maceió e online: escolhas, carreira, relações, autocobrança e transições, com TCC baseada em evidências. Agende pelo WhatsApp."
+  ogTitulo="Psicoterapia para jovens adultos · Nicole Leão"
+  ogDescricao="Para quem atravessa escolhas, cobranças e transições e quer se compreender melhor, no seu ritmo."
+  jsonld={schemaServico("jovens", "Psicoterapia para jovens adultos com Terapia Cognitivo-Comportamental, presencial em Maceió ou online.")}
+  flutuante="jovens"
+>
+  <section class="pagina-topo" id="inicio" aria-labelledby="titulo-pagina">
+    <div class="cont">
+      <nav class="trilha" aria-label="Você está em">
+        <ol><li><a href="/">Início</a></li><li aria-current="page">Psicoterapia para jovens adultos</li></ol>
+      </nav>
+      <div class="servico-cab">
+        <div class="texto">
+          <h1 id="titulo-pagina">Psicoterapia para jovens adultos</h1>
+          <p class="sub">Estudos e carreira, independência, relacionamentos e, para muitos, a construção da própria família: o início da vida adulta pede muitas escolhas ao mesmo tempo. A terapia oferece escuta e método para compreender os padrões que se repetem e seguir, no seu ritmo, com mais clareza e segurança.</p>
+          <div class="acoes">
+            <WhatsApp class="btn btn-pri" msg="jovens" origem="topo-jovens" icone>Agendar pelo WhatsApp</WhatsApp>
+            <a class="link-seta baixo" href="#sobre-o-atendimento"><span>Entender o atendimento</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
+          </div>
+          <ul class="chips" aria-label="Formato do atendimento">
+            <li class="chip">Presencial em Maceió</li>
+            <li class="chip">Online</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" id="sobre-o-atendimento" aria-label="Sobre a psicoterapia para jovens adultos">
+    <div class="cont servico-grade">
+      <article class="leitura">
+        <section class="revela" aria-labelledby="t-oque">
+          <p class="rotulo">No início da vida adulta</p>
+          <h2 id="t-oque">O que é a psicoterapia para jovens adultos</h2>
+          <p>Do início da vida adulta aos anos em que ela se consolida, muitas frentes ganham forma ao mesmo tempo: os estudos e a carreira, a independência financeira, a saída de casa, os relacionamentos afetivos e, para muitos, a construção da própria família. Com o tempo, algumas raízes já estão firmes, e surgem outras perguntas: as escolhas feitas ainda fazem sentido? Como equilibrar trabalho, afetos e tempo para si? Na terapia, ajudo a organizar o que se pensa e se sente diante dessas transições e a reconhecer padrões que se repetem nas escolhas, no trabalho e nas relações.</p>
+        </section>
+        <section class="revela" aria-labelledby="t-importa">
+          <h2 id="t-importa">Por que é importante</h2>
+          <p>É também um tempo de muitas comparações, com os outros e com o que se imaginava ter conquistado até aqui. Questões como propósito, identidade, autoestima e a relação com a família de origem costumam ganhar outro peso, e muitas cobranças passam a ser internas e silenciosas. Olhar para elas com cuidado permite fortalecer o que já foi construído e ajustar o que precisa mudar, com mais autoconhecimento, autonomia e segurança emocional.</p>
+        </section>
+      </article>
+      <aside class="resumo" aria-label="Resumo do atendimento">
+        <p class="lista-t">A terapia pode auxiliar a:</p>
+        <ul class="lista">
+          <li>Organizar o que se pensa e se sente diante das transições</li>
+          <li>Reconhecer padrões que se repetem nas escolhas, no trabalho e nas relações</li>
+          <li>Lidar com as comparações e com as cobranças internas</li>
+          <li>Olhar para questões de propósito, identidade e autoestima</li>
+          <li>Ganhar autoconhecimento, autonomia e segurança emocional</li>
+        </ul>
+        <p class="funciona"><b>Como funciona:</b> sessões semanais de 50 minutos, presenciais em Maceió ou online.</p>
+        <WhatsApp class="btn btn-pri" msg="jovens" origem="resumo-jovens">Quero começar minha terapia</WhatsApp>
+        <a class="link-seta" href="/#sinais-jovens" data-caminho="sinais-jovens"><span>Quando procurar ajuda</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="faixa malva" aria-labelledby="titulo-outros">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo">Outros atendimentos</p>
+        <h2 id="titulo-outros">Cuidar de quem chega é também cuidar dos vínculos que o sustentam.</h2>
+      </div>
+      <Caminhos exceto="jovens" />
+    </div>
+  </section>
+</Base>

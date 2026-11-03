@@ -21,15 +21,16 @@
   --tint-malva:#F0E8ED;
   --linha:#E4DED1;
 
-  --f-display:"Newsreader", "Iowan Old Style", Georgia, serif;
-  --f-corpo:"Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Fontes servidas pelo próprio site (Astro Fonts, em astro.config.mjs), já com as de reserva */
+  --f-display:var(--fonte-newsreader);
+  --f-corpo:var(--fonte-nunito);
 
   --t-xs:.8125rem; --t-s:.9375rem; --t-m:1.0625rem; --t-l:1.25rem;
   --t-xl:clamp(1.6rem, 1.2rem + 1.8vw, 2.25rem);
   --t-xxl:clamp(2.1rem, 1.5rem + 3vw, 3.4rem);
   --raio:14px;
   --arco:200px;
-  /* Cabeçalho: recuo da área segura (entalhe/ilha) + um respiro, para nada encostar no topo do aparelho */
+  /* Cabeçalho: recuo da área segura (entalhe/ilha) + um respiro, dividido entre cima e baixo para a logo ficar centralizada */
   --topo-respiro:10px;
   --topo-linha:60px;
   --topo-altura:calc(var(--topo-respiro) + var(--topo-linha) + env(safe-area-inset-top, 0px));
@@ -73,7 +74,7 @@ ul,ol{margin:0;padding:0}
 .faixa.clara{background:var(--papel)}
 .faixa.salvia{background:var(--tint-salvia)}
 /* Mesmo padrão de dente-de-leão do rodapé, em ameixa bem suave sobre o rosa */
-.faixa.malva{background:var(--tint-malva) url("assets/padrao-flor-malva.svg") repeat;background-size:132px}
+.faixa.malva{background:var(--tint-malva) url("/assets/padrao-flor-malva.svg") repeat;background-size:132px}
 .intro{display:grid;gap:14px;max-width:680px;margin-bottom:clamp(28px,5vw,44px)}
 .duas{display:grid;gap:28px}
 .duas .texto{display:grid;gap:16px;min-width:0;align-content:start}
@@ -108,14 +109,12 @@ ul,ol{margin:0;padding:0}
 
 /* ---------- Cabeçalho e menu (todas as páginas) ---------- */
 /* O próprio cabeçalho cobre a área do entalhe com o seu fundo e empurra o conteúdo para baixo dela */
-.topo{position:sticky;top:0;z-index:50;padding-top:calc(var(--topo-respiro) + env(safe-area-inset-top, 0px));background:rgba(248,246,237,.92);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid transparent;transition:border-color .2s ease, box-shadow .2s ease}
+.topo{position:sticky;top:0;z-index:50;padding-top:calc(var(--topo-respiro) / 2 + env(safe-area-inset-top, 0px));padding-bottom:calc(var(--topo-respiro) / 2);background:rgba(248,246,237,.92);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid transparent;transition:border-color .2s ease, box-shadow .2s ease}
 /* A borda só aparece quando há conteúdo passando por baixo */
 .topo.rolado{border-bottom-color:var(--linha);box-shadow:0 10px 24px -20px rgba(78,56,72,.45)}
 .topo .cont{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:var(--topo-linha)}
-.marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ameixa);min-width:0}
-.marca-simb{width:58px;height:36px;flex:none;fill:var(--ameixa);margin-right:-4px}
-.marca b{font-family:var(--f-display);font-weight:500;font-size:1.2rem;display:block;line-height:1.1;white-space:nowrap}
-.marca small{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--salvia-texto);font-weight:700;white-space:nowrap}
+.marca{display:block;flex:none;border-radius:8px}
+.marca-logo{display:block;height:52px;width:auto}
 
 .topo-acoes{display:flex;align-items:center}
 .menu-btn{width:48px;height:48px;border:0;background:transparent;border-radius:10px;display:grid;place-items:center;cursor:pointer;color:var(--ameixa);touch-action:manipulation}
@@ -140,7 +139,7 @@ ul,ol{margin:0;padding:0}
 /* Computador: menu em linha, com "Atendimentos" abrindo um painel ancorado no próprio botão */
 @media (min-width:1000px){
   .topo-acoes{display:none}
-  .marca-simb{width:72px;height:45px;margin-right:-6px}
+  .marca-logo{height:60px}
   .nav{position:static;max-height:none;overflow:visible;box-shadow:none;border:0;background:none;opacity:1;visibility:visible;transform:none;transition:none}
   .nav-lista{display:flex;align-items:center;gap:2px;padding:0}
   .nav a{min-height:0;padding:10px;font-size:var(--t-s);border-radius:8px}
@@ -255,7 +254,8 @@ ul,ol{margin:0;padding:0}
 .pagina-topo h1{font-size:clamp(1.9rem, 1.4rem + 2.4vw, 3rem);letter-spacing:-.02em;line-height:1.08;max-width:820px}
 .pagina-topo .sub{max-width:64ch}
 /* Caminho no topo: sempre numa linha só; o nome longo é cortado com reticências */
-.trilha ol{list-style:none;display:flex;flex-wrap:nowrap;gap:6px;white-space:nowrap;overflow:hidden;font-size:var(--t-xs);font-weight:600;color:var(--malva-texto)}
+/* O padding com margem negativa dá folga ao overflow:hidden, para não cortar o contorno de foco dos links */
+.trilha ol{list-style:none;display:flex;flex-wrap:nowrap;gap:6px;white-space:nowrap;overflow:hidden;padding:6px;margin:-6px;font-size:var(--t-xs);font-weight:600;color:var(--malva-texto)}
 .trilha li{flex:none}
 .trilha li:last-child{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .trilha li+li::before{content:"/";margin-right:6px;color:var(--malva)}
@@ -275,7 +275,6 @@ ul,ol{margin:0;padding:0}
 .leitura h2{font-size:clamp(1.45rem, 1.2rem + .9vw, 1.8rem)}
 /* Citação em destaque */
 .citacao{font-family:var(--f-display);font-style:italic;font-size:1.3125rem;color:var(--ameixa);line-height:1.45;padding-left:18px;border-left:2px solid var(--salvia)}
-.nota-cruzada{font-size:var(--t-s);background:var(--tint-malva);border-radius:10px;padding:12px 16px}
 /* Resumo: o que a terapia trabalha, como funciona e o botão, num cartão */
 .resumo{display:grid;gap:14px;align-content:start;min-width:0;padding:clamp(22px,3vw,28px);background:var(--papel);border:1px solid var(--linha);border-radius:var(--raio)}
 .resumo .btn{width:100%;margin-top:4px;padding-inline:18px;font-size:var(--t-s)}
@@ -330,7 +329,6 @@ ul,ol{margin:0;padding:0}
 .etapa h3{font-size:1.2rem;padding-top:6px}
 .etapa p{font-size:var(--t-s)}
 .cta-bloco{display:grid;gap:12px;justify-items:start;margin-top:8px}
-.cta-bloco small{font-size:var(--t-xs)}
 
 .faq{display:grid;gap:10px}
 .faq details{background:var(--papel);border:1px solid var(--linha);border-radius:12px}
@@ -402,7 +400,9 @@ ul,ol{margin:0;padding:0}
 .pol-caixa{margin-top:18px;padding:16px 18px;border-radius:var(--raio);background:var(--tint-salvia)}
 
 /* ---------- Rodapé compartilhado ---------- */
-.rodape{background:var(--verde) url("assets/padrao-flor.svg") repeat;background-size:132px;color:var(--creme)}
+.rodape{background:var(--verde) url("/assets/padrao-flor.svg") repeat;background-size:132px;color:var(--creme)}
+/* Sobre o verde, o contorno de foco padrão (sálvia) some: no rodapé ele fica creme */
+.rodape :focus-visible{outline-color:var(--creme)}
 .rodape-corpo{display:grid;gap:24px;padding-block:clamp(40px,6vw,64px) 28px}
 .rodape h2{color:var(--creme);font-size:clamp(1.45rem, 1.15rem + 1.2vw, 1.9rem)}
 .rodape .rotulo{color:var(--salvia-clara);background:none}

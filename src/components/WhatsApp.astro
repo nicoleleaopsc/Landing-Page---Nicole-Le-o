@@ -1,0 +1,18 @@
+---
+// Botão ou link de WhatsApp com a mensagem pronta. Todo link de WhatsApp do conteúdo passa por aqui:
+// "data-sem-flutuante" esconde o botão flutuante enquanto este estiver na tela (nunca dois iguais à vista),
+// e "data-origem" diz às métricas de onde veio o clique.
+import type { HTMLAttributes } from "astro/types";
+import { linkWhatsApp, type ChaveMensagem } from "../data/site";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+  msg: ChaveMensagem;
+  origem: string;
+  /** Mostra o ícone de mensagem antes do texto */
+  icone?: boolean;
+}
+
+const { msg, origem, icone = false, ...resto } = Astro.props;
+---
+
+<a href={linkWhatsApp(msg)} target="_blank" rel="noopener" data-origem={origem} data-sem-flutuante {...resto}>{icone && <svg aria-hidden="true"><use href="#i-msg" /></svg>}<slot /></a>

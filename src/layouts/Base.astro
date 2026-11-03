@@ -1,0 +1,191 @@
+---
+// Estrutura comum a todas as páginas: <head> com SEO e compartilhamento, cabeçalho, conteúdo, rodapé e botão flutuante.
+import { Font } from "astro:assets";
+import type { Graph } from "schema-dts";
+import "../styles/global.css";
+import Sprite from "../components/Sprite.astro";
+import Cabecalho from "../components/Cabecalho.astro";
+import Rodape from "../components/Rodape.astro";
+import Flutuante from "../components/Flutuante.astro";
+import { CONTATO, MARCA, type ChaveMensagem } from "../data/site";
+import { IMAGEM_COMPARTILHAR, url } from "../lib/schema";
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  /** Título e descrição para WhatsApp, Instagram e redes (Open Graph) */
+  ogTitulo?: string;
+  ogDescricao?: string;
+  /** false = noindex, sem dados de compartilhamento e fora do mapa do site */
+  indexar?: boolean;
+  /** false na página 404, que não tem endereço próprio */
+  canonico?: boolean;
+  jsonld?: Graph;
+  /** Mensagem do botão flutuante de WhatsApp; false tira o botão da página */
+  flutuante?: ChaveMensagem | false;
+}
+
+const {
+  titulo,
+  descricao,
+  ogTitulo = titulo,
+  ogDescricao = descricao,
+  indexar = true,
+  canonico = true,
+  jsonld,
+  flutuante = "geral",
+} = Astro.props;
+
+const enderecoCanonico = url(Astro.url.pathname);
+const ogAlt = `${MARCA} · ${CONTATO.crp} · Cuidado que semeia autonomia.`;
+// Navegadores compatíveis pré-carregam a próxima página quando o cursor para sobre um link
+const regrasPrecarga = JSON.stringify({ prefetch: [{ where: { href_matches: "/*" }, eagerness: "moderate" }] });
+// "<" escapado para o JSON nunca fechar a tag <script> por acidente
+const dadosEstruturados = jsonld && JSON.stringify(jsonld).replace(/</g, "\\u003c");
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <meta name="robots" content={indexar ? "index, follow, max-image-preview:large" : "noindex, follow"} />
+    <meta name="author" content={CONTATO.nome} />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#F8F6ED" />
+    {canonico && <link rel="canonical" href={enderecoCanonico} />}
+    {
+      indexar && (
+        <>
+          <meta name="geo.region" content="BR-AL" />
+          <meta name="geo.placename" content="Maceió" />
+          <meta name="geo.position" content="-9.66583;-35.73528" />
+          <meta name="ICBM" content="-9.66583, -35.73528" />
+        </>
+      )
+    }
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content={CONTATO.nome} />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    {
+      indexar && (
+        <>
+          <meta property="og:type" content="website" />
+          <meta property="og:locale" content="pt_BR" />
+          <meta property="og:site_name" content={MARCA} />
+          <meta property="og:title" content={ogTitulo} />
+          <meta property="og:description" content={ogDescricao} />
+          <meta property="og:url" content={enderecoCanonico} />
+          <meta property="og:image" content={IMAGEM_COMPARTILHAR} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={ogAlt} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content={IMAGEM_COMPARTILHAR} />
+          <meta name="twitter:image:alt" content={ogAlt} />
+        </>
+      )
+    }
+    <Font cssVariable="--fonte-nunito" preload />
+    <Font cssVariable="--fonte-newsreader" preload={[{ style: "normal" }]} />
+    <script type="speculationrules" is:inline set:html={regrasPrecarga} />
+    {dadosEstruturados && <script type="application/ld+json" is:inline set:html={dadosEstruturados} />}
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <Sprite />
+    <Cabecalho />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Rodape />
+    {flutuante !== false && <Flutuante msg={flutuante} />}
+  </body>
+</html>
+
+<script>
+  import { GA_ID } from "../data/site";
+
+  const reduzMov = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Revelação suave ao rolar. O que já está na tela ao carregar fica parado,
+  // para não piscar nem atrasar a abertura (e quem chega por um link #âncora já vê o conteúdo).
+  if ("IntersectionObserver" in window && !reduzMov.matches) {
+    const alvos = Array.from(document.querySelectorAll<HTMLElement>(".revela")).filter(
+      (el) => el.getBoundingClientRect().top > window.innerHeight,
+    );
+    // Cartões de uma mesma grade entram em cascata
+    document.querySelectorAll("[data-cascata]").forEach((grade) => {
+      let n = 0;
+      for (const filho of Array.from(grade.children) as HTMLElement[]) {
+        if (alvos.includes(filho)) {
+          filho.style.transitionDelay = `${Math.min(n, 5) * 60}ms`;
+          n++;
+        }
+      }
+    });
+    alvos.forEach((el) => el.classList.add("anima"));
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          if (e.isIntersecting) {
+            e.target.classList.add("vis");
+            observador.unobserve(e.target);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0 },
+    );
+    alvos.forEach((el) => observador.observe(el));
+  }
+
+  // Métricas: cada botão de WhatsApp informa a origem; cada caminho informa qual parte foi escolhida.
+  // Os eventos ficam na fila do dataLayer e só saem do navegador se o Analytics for ativado e aceito.
+  type JanelaComGA = Window & { dataLayer?: unknown[] };
+  const janela = window as JanelaComGA;
+  janela.dataLayer = janela.dataLayer || [];
+  function gtag(..._args: unknown[]) {
+    // O gtag.js espera o objeto "arguments", não um array
+    janela.dataLayer!.push(arguments);
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target instanceof Element ? e.target.closest("a[data-origem], a[data-caminho]") : null;
+    if (!a) return;
+    if (a.hasAttribute("data-origem")) gtag("event", "clique_whatsapp", { origem: a.getAttribute("data-origem") });
+    else gtag("event", "clique_caminho", { caminho: a.getAttribute("data-caminho") });
+  });
+
+  // Consentimento de cookies (só com GA_ID preenchido)
+  const aviso = document.getElementById("cookies");
+  if (GA_ID && aviso) {
+    const CHAVE = "nl-cookies";
+    let escolha: string | null = null;
+    try {
+      escolha = localStorage.getItem(CHAVE);
+    } catch {}
+    const carregarGA = () => {
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+      document.head.appendChild(s);
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    };
+    if (escolha === "aceito") carregarGA();
+    else if (escolha !== "recusado") aviso.hidden = false;
+    const salvar = (valor: "aceito" | "recusado") => {
+      try {
+        localStorage.setItem(CHAVE, valor);
+      } catch {}
+      aviso.hidden = true;
+      if (valor === "aceito") carregarGA();
+    };
+    document.getElementById("cookies-aceitar")?.addEventListener("click", () => salvar("aceito"));
+    document.getElementById("cookies-recusar")?.addEventListener("click", () => salvar("recusado"));
+  }
+</script>

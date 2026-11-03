@@ -1,0 +1,97 @@
+---
+import Base from "../layouts/Base.astro";
+import Caminhos from "../components/Caminhos.astro";
+import SinaisAbas from "../components/SinaisAbas.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+import { Picture } from "astro:assets";
+import fotoNicole from "../assets/fotos/nicole-leao-psicologa-maceio.jpg";
+import fotoSobre from "../assets/fotos/nicole-leao-sobre.jpg";
+import { schemaInicio } from "../lib/schema";
+---
+
+<Base
+  titulo="Psicóloga Infantojuvenil em Maceió | Nicole Leão"
+  descricao="Psicóloga em Maceió para crianças, adolescentes, jovens adultos e orientação a pais. Atendimento presencial e online, com base na Terapia Cognitivo-Comportamental."
+  ogTitulo="Nicole Leão · Psicóloga infantil e de adolescentes em Maceió"
+  ogDescricao="Cuidado que semeia autonomia. Psicoterapia com escuta, ciência e afeto, presencial em Maceió e online."
+  jsonld={schemaInicio()}
+>
+  {/* 1. Abertura: foto, linha de apoio, título, frase-convite e o primeiro passo */}
+  <section class="hero" id="inicio" aria-labelledby="titulo-inicio">
+    <div class="cont">
+      <div class="hero-texto">
+        <h1 id="titulo-inicio"><span class="kw">Atendimento ao público infantojuvenil, jovem adulto e aos pais</span>Cuidado que semeia autonomia.</h1>
+        <p class="sub">E se o primeiro passo fosse apenas uma conversa?</p>
+        <div class="hero-ctas">
+          <WhatsApp class="btn btn-pri" msg="geral" origem="abertura" icone>Agendar pelo WhatsApp</WhatsApp>
+          <a class="link-seta baixo" href="#caminhos"><span>Ou veja como posso ajudar</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
+        </div>
+      </div>
+      <figure class="hero-foto">
+        <div class="moldura">
+          <Picture src={fotoNicole} formats={["avif", "webp"]} fallbackFormat="jpg" widths={[280, 420, 560, 840]} sizes="(min-width: 900px) 420px, min(280px, 72vw)" alt="Nicole Leão, psicóloga clínica em Maceió, sorrindo de braços cruzados" fetchpriority="high" loading="eager" decoding="async" />
+        </div>
+        <span class="selo"><svg aria-hidden="true"><use href="#i-selo"/></svg>CRP 15/8699</span>
+      </figure>
+    </div>
+  </section>
+
+  {/* Faixa de reforçadores */}
+  <section class="reforcos" aria-label="Sobre o atendimento">
+    <ul class="cont reforcos-grade">
+      <li><b>Da infância à vida adulta</b><span>Crianças, adolescentes, jovens adultos e orientação aos pais</span></li>
+      <li><b>Terapia Cognitivo-Comportamental</b><span>Abordagem baseada em evidências</span></li>
+      <li><b>Sessões de 50 minutos</b><span>Semanais, presenciais em Maceió ou online</span></li>
+      <li><b>Segunda a sexta</b><span>Das 9h às 19h, com horário pré-agendado</span></li>
+    </ul>
+  </section>
+
+  {/* 2. Comece por aqui: cada caminho leva à página do atendimento */}
+  <section class="faixa malva" id="caminhos" aria-labelledby="titulo-caminhos">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo fio"><span class="fio-ic" aria-hidden="true"><svg><use href="#l-semente"/></svg></span>Semente <span class="sep">·</span> Comece por aqui</p>
+        <h2 id="titulo-caminhos">Para quem é o cuidado que você procura?</h2>
+        <p>Cada momento da vida tem a sua própria linguagem. Escolha o seu caminho e descubra, em detalhes, como o acompanhamento acontece.</p>
+      </div>
+      <Caminhos />
+      <p class="fecho">Começar já é, por si só, um gesto de cuidado.</p>
+    </div>
+  </section>
+
+  {/* 3. Quando procurar: os sinais mudam conforme o público; as abas alternam sozinhas até a pessoa escolher uma */}
+  <section class="faixa" id="motivos" aria-labelledby="titulo-motivos">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo">Quando procurar ajuda</p>
+        <h2 id="titulo-motivos">Não é preciso esperar que algo esteja muito difícil.</h2>
+        <p>Os sinais mudam conforme a fase da vida. Escolha um público para ver alguns dos mais comuns, que já são bons motivos para uma primeira conversa.</p>
+      </div>
+      <SinaisAbas />
+      <div class="motivos-fim">
+        <p>O primeiro encontro serve justamente para compreender o momento e pensar juntos no melhor caminho.</p>
+        <WhatsApp class="btn btn-pri" msg="geral" origem="motivos" data-wa-publico icone>Conversar pelo WhatsApp</WhatsApp>
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Sobre mim */}
+  <section class="faixa clara" id="quem-sou" aria-labelledby="titulo-quem">
+    <div class="cont quem">
+      <figure class="foto revela">
+        <Picture src={fotoSobre} formats={["avif", "webp"]} fallbackFormat="jpg" widths={[300, 480, 600, 960]} sizes="(min-width: 900px) 480px, 300px" alt="Nicole Leão sorrindo, de colete preto, em retrato de estúdio" loading="lazy" decoding="async" />
+      </figure>
+      <div class="texto">
+        <p class="rotulo">Sobre mim</p>
+        <h2 id="titulo-quem">Muito prazer, sou a Nicole.</h2>
+        <p>Desde muito nova, fui a pessoa com quem desconhecidos se abriam: numa fila de espera, na recepção de um consultório, nos lugares mais inesperados. Alma velha e tranquila, como dizem os meus amigos, sempre encontrei as palavras certas para acolher quem estava por perto. A psicologia foi a forma que encontrei de transformar essa escuta em profissão e de oferecê-la com método, ciência e responsabilidade.</p>
+        <p>Fora do consultório, sou uma mulher decidida, leal e intensa em tudo o que faço. Amo minha família, meu companheiro e porto seguro, e meus amigos com o mesmo cuidado que ofereço em sessão: olhar para o outro de forma singular é próprio de quem eu sou. Tenho cachorros adoráveis, que muitas vezes são meus reguladores emocionais. Adoro ler, escrever, cozinhar, ir ao cinema e a cafés charmosos (e nada baratos); colecionar essas experiências é essencial para me reconectar. E não dispenso um bom jogo de basquete ao lado do meu pai. É na natureza, no campo, que costumo encontrar a minha própria paz.</p>
+        <div class="links">
+          <a class="link-seta" href="/sobre/#trajetoria" data-caminho="trajetoria"><span>Conhecer minha trajetória</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          <a class="link-seta" href="/como-funciona/#como-cuido" data-caminho="abordagem"><span>Como eu trabalho</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          <a class="link-seta" href="/como-funciona/#duvidas" data-caminho="duvidas"><span>Perguntas frequentes</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

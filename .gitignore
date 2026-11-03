@@ -1,2 +1,12 @@
 # Material de trabalho (fotos originais, textos de apoio, cópia da versão anterior): não vai para o site
 .context/
+
+# Dependências e arquivos gerados pelo Astro
+node_modules/
+dist/
+.astro/
+
+# Sistema e editor
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,28 @@
+---
+// Página para endereços que não existem: oferece os caminhos do site e o WhatsApp, em vez de um beco sem saída
+import Base from "../layouts/Base.astro";
+import Caminhos from "../components/Caminhos.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+---
+
+<Base
+  titulo="Página não encontrada | Nicole Leão"
+  descricao="Esta página não existe ou mudou de endereço."
+  indexar={false}
+  canonico={false}
+>
+  <section class="pagina-topo" aria-labelledby="titulo-pagina">
+    <div class="cont coluna">
+      <h1 id="titulo-pagina">Esta página não foi encontrada.</h1>
+      <p class="sub">O endereço pode ter mudado ou estar incompleto. Escolha um dos caminhos abaixo ou volte para o <a href="/">início</a>.</p>
+      <div class="hero-ctas">
+        <WhatsApp class="btn btn-pri" msg="geral" origem="pagina-404" icone>Conversar pelo WhatsApp</WhatsApp>
+      </div>
+    </div>
+  </section>
+  <section class="faixa malva" aria-label="Atendimentos">
+    <div class="cont">
+      <Caminhos />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import Caminhos from "../components/Caminhos.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+import { schemaServico } from "../lib/schema";
+---
+
+<Base
+  titulo="Psicoterapia infantil em Maceió | Psicóloga Nicole Leão"
+  descricao="Psicoterapia infantil em Maceió com TCC: pelo brincar, a criança aprende a reconhecer o que sente, com os pais participando do processo. Agende pelo WhatsApp."
+  ogTitulo="Psicoterapia infantil em Maceió · Nicole Leão"
+  ogDescricao="Pelo brincar, a criança aprende a reconhecer o que sente, com a família participando do caminho."
+  jsonld={schemaServico("infantil", "Psicoterapia para crianças com Terapia Cognitivo-Comportamental, por meio de jogos e atividades lúdicas, com orientação e devolutivas aos pais.", { online: false })}
+  flutuante="infantil"
+>
+  <section class="pagina-topo" id="inicio" aria-labelledby="titulo-pagina">
+    <div class="cont">
+      <nav class="trilha" aria-label="Você está em">
+        <ol><li><a href="/">Início</a></li><li aria-current="page">Psicoterapia infantil</li></ol>
+      </nav>
+      <div class="servico-cab">
+        <div class="texto">
+          <h1 id="titulo-pagina">Psicoterapia infantil</h1>
+          <p class="sub">Quando uma criança atravessa um momento difícil, toda a família sente, e toda a família também pode fazer parte do caminho. O ambiente familiar não define quem o filho é, mas influencia a forma como ele aprende a lidar com as próprias emoções. No acompanhamento, seu filho ou filha encontra um espaço seguro para compreender o que sente e desenvolver novos recursos. Paralelamente, vocês recebem orientação para sustentar essas conquistas no dia a dia, com mais previsibilidade, diálogo e acolhimento.</p>
+          <div class="acoes">
+            <WhatsApp class="btn btn-pri" msg="infantil" origem="topo-infantil" icone>Agendar pelo WhatsApp</WhatsApp>
+            <a class="link-seta baixo" href="#sobre-o-atendimento"><span>Entender o atendimento</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
+          </div>
+          <ul class="chips" aria-label="Formato do atendimento">
+            <li class="chip">Presencial em Maceió</li>
+            <li class="chip">Sessões semanais de 50 minutos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" id="sobre-o-atendimento" aria-label="Sobre a psicoterapia infantil">
+    <div class="cont servico-grade">
+      <article class="leitura">
+        <section class="revela" aria-labelledby="t-oque">
+          <p class="rotulo">Na infância</p>
+          <h2 id="t-oque">O que é a psicoterapia infantil</h2>
+          <p>Na infância, as emoções ainda estão sendo descobertas e, muitas vezes, aparecem no comportamento antes de ganharem palavras. A criança também é muito sensível aos ambientes em que está inserida, como a família e a escola, e às mudanças que acontecem neles. Na psicoterapia infantil, conduzo o encontro por meio de jogos e atividades lúdicas, e é assim que a criança aprende a reconhecer o que sente, a lidar com frustrações e a experimentar novas formas de agir.</p>
+        </section>
+        <section class="revela" aria-labelledby="t-importa">
+          <h2 id="t-importa">Por que é importante</h2>
+          <p>É nos primeiros anos que se constroem as bases da regulação emocional, da autoestima e da forma de se relacionar. Para isso, toda criança precisa se sentir segura e acolhida, ter suas emoções reconhecidas e contar com limites que a orientem. Cuidar desse momento é oferecer à criança recursos que podem acompanhá-la por toda a vida.</p>
+        </section>
+      </article>
+      <aside class="resumo" aria-label="Resumo do atendimento">
+        <p class="lista-t">A terapia pode auxiliar a:</p>
+        <ul class="lista">
+          <li>Reconhecer, nomear e regular melhor as emoções</li>
+          <li>Fortalecer a autoestima e a confiança nas próprias capacidades</li>
+          <li>Lidar com frustrações e com a espera</li>
+          <li>Desenvolver habilidades para conviver e se relacionar</li>
+          <li>Ganhar organização e autonomia na rotina e nos estudos</li>
+        </ul>
+        <p class="funciona"><b>Como funciona:</b> o primeiro encontro é com os pais, para conhecer a história, a rotina e o que motivou a busca. Depois, as sessões semanais acontecem com a criança, e a família recebe devolutivas periódicas, preservando o espaço de confiança do filho.</p>
+        <WhatsApp class="btn btn-pri" msg="infantil" origem="resumo-infantil">Quero cuidar do meu filho(a)</WhatsApp>
+        <a class="link-seta" href="/#sinais-infantil" data-caminho="sinais-infantil"><span>Quando procurar ajuda</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="faixa malva" aria-labelledby="titulo-outros">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo">Outros atendimentos</p>
+        <h2 id="titulo-outros">Cuidar de quem chega é também cuidar dos vínculos que o sustentam.</h2>
+      </div>
+      <Caminhos exceto="infantil" />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,81 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  titulo="Política de privacidade | Nicole Leão"
+  descricao="Como são tratados os dados pessoais de quem visita o site ou entra em contato com a psicóloga Nicole Leão, conforme a LGPD."
+  indexar={false}
+  flutuante={false}
+>
+  <section class="pagina-topo" aria-labelledby="titulo-pagina">
+    <div class="cont coluna">
+      <nav class="trilha" aria-label="Você está em">
+        <ol>
+          <li><a href="/">Início</a></li>
+          <li aria-current="page">Política de privacidade</li>
+        </ol>
+      </nav>
+      <h1 id="titulo-pagina">Política de privacidade</h1>
+      {/* PENDENTE: trocar pela data de publicação do site */}
+      <p class="sub">Última atualização: 3 de novembro de 2026</p>
+    </div>
+  </section>
+
+  <section class="faixa">
+    <div class="cont coluna pol">
+      <nav class="pol-indice" aria-label="Itens desta política">
+        <ol>
+          <li><a href="#responsavel">Responsável pelo tratamento</a></li>
+          <li><a href="#dados-coletados">Dados coletados</a></li>
+          <li><a href="#finalidades">Finalidades</a></li>
+          <li><a href="#bases-legais">Bases legais</a></li>
+          <li><a href="#dados-sensiveis">Dados de saúde, de crianças e de adolescentes</a></li>
+          <li><a href="#compartilhamento">Compartilhamento</a></li>
+          <li><a href="#cookies-politica">Cookies</a></li>
+          <li><a href="#armazenamento">Armazenamento e prazo</a></li>
+          <li><a href="#seguranca">Segurança</a></li>
+          <li><a href="#direitos">Seus direitos</a></li>
+          <li><a href="#alteracoes">Alterações</a></li>
+        </ol>
+      </nav>
+      {/* Texto para o site sem Google Analytics (GA_ID vazio em src/data/site.ts) e com as fontes servidas pelo próprio site. Se o Analytics for ativado:
+           item 2, "Dados de navegação" passa a "Endereço IP, tipo de navegador e dispositivo, páginas visitadas e tempo de permanência, coletados por cookies e ferramentas de análise, quando utilizadas.";
+           item 4, "registros técnicos de navegação" volta a "dados de navegação"; item 6, acrescentar "ferramentas de análise" à lista do Google;
+           item 7, citar os cookies de análise e o aviso de consentimento; resumo, tirar "ferramentas de análise"; rodapé, link "Preferências de cookies"; atualizar a data. */}
+      <p>Esta Política explica como são tratados os dados pessoais de quem visita este site ou entra em contato por meio dele, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018, LGPD).</p>
+      <p>Em resumo: este site não tem formulários, não pede cadastro, não usa ferramentas de análise ou de publicidade e não armazena dados pessoais. As informações que você decidir compartilhar chegam apenas pelos canais de contato (WhatsApp e e-mail) e são tratadas com sigilo.</p>
+      <h2 id="responsavel">1. Responsável pelo tratamento</h2>
+      <p>Nicole Leão Mendonça Lima, psicóloga clínica, CRP 15/8699, é a controladora dos dados pessoais tratados neste site. Contato: psinicole.leao@gmail.com.</p>
+      <h2 id="dados-coletados">2. Dados coletados</h2>
+      {/* PENDENTE: se os contatos pelo direct do Instagram forem atendidos, incluir o Instagram aqui, no resumo e no item 6 */}
+      <ul class="pol-lista">
+        <li><b>Dados fornecidos por você:</b> Ao entrar em contato pelo WhatsApp ou por e-mail, você pode informar nome, telefone, e-mail e outras informações que decidir compartilhar, inclusive sobre a pessoa que será atendida.</li>
+        <li><b>Dados para o início do acompanhamento:</b> Ao iniciar o acompanhamento, são solicitados os dados necessários ao registro e à emissão de recibos, como nome, CPF, data de nascimento e contato da pessoa atendida e, quando for o caso, dos responsáveis. Essa coleta é feita por mensagem ou por formulário enviado por e-mail.</li>
+        <li><b>Dados de navegação:</b> Informações técnicas básicas, como endereço IP e tipo de navegador, registradas automaticamente pelo provedor de hospedagem para o funcionamento e a segurança do site. No momento, o site não utiliza ferramentas de análise.</li>
+        <li><b>Acesso às cartilhas:</b> Não exige cadastro nem fornecimento de dados pessoais.</li>
+      </ul>
+      <h2 id="finalidades">3. Finalidades</h2>
+      <p>Os dados são usados para responder aos contatos, agendar e organizar atendimentos, enviar informações relacionadas ao acompanhamento, emitir recibos e manter o registro documental exigido pelas normas da profissão. Os dados pessoais não são vendidos nem cedidos para fins comerciais.</p>
+      <h2 id="bases-legais">4. Bases legais</h2>
+      <p>O tratamento ocorre com base no consentimento do titular, na execução do contrato de atendimento e de procedimentos preliminares a ele relacionados, a pedido do titular, no cumprimento de obrigações legais e regulatórias da profissão, no legítimo interesse, no caso dos registros técnicos de navegação, e, para os dados de saúde, na tutela da saúde, em procedimento realizado por profissional de saúde (art. 11, II, f, da LGPD).</p>
+      <h2 id="dados-sensiveis">5. Dados de saúde, de crianças e de adolescentes</h2>
+      <p>Informações relacionadas à saúde são dados sensíveis e recebem proteção reforçada, sob o dever de sigilo previsto no Código de Ética Profissional do Psicólogo. Dados de crianças e adolescentes são tratados com a autorização de pelo menos um dos pais ou responsáveis legais, combinada no início do acompanhamento, e sempre no melhor interesse da criança ou do adolescente. As sessões, presenciais ou online, não são gravadas; se, em algum caso, a gravação se mostrar necessária, ela só ocorrerá com a finalidade explicada e a autorização prévia da pessoa atendida ou do responsável. Quando um caso é discutido em supervisão clínica, a identidade da pessoa atendida é preservada. Recomenda-se não enviar informações detalhadas de saúde por mensagem antes do primeiro encontro; esse espaço de escuta acontece na sessão.</p>
+      <h2 id="compartilhamento">6. Compartilhamento</h2>
+      {/* PENDENTE: Google Forms (se o formulário de cadastro for dele), Instagram (ver item 2), banco ou Pix (se receber por transferência)
+           e o aviso de servidores fora do Brasil: "Alguns desses serviços podem armazenar dados em servidores fora do Brasil, com as garantias de proteção previstas na LGPD." */}
+      <p>Os dados podem ser processados por serviços necessários ao funcionamento do site e do atendimento: WhatsApp, para contato e agendamento; Google (Gmail, Google Drive, Google Agenda e Google Meet), para comunicação, guarda de registros, organização da agenda e sessões online; o aplicativo Receita Saúde, da Receita Federal, para emissão de recibos; e o provedor de hospedagem do site. Cada serviço tem sua própria política de privacidade. Os dados também podem ser compartilhados com autoridades, quando houver exigência legal.</p>
+      <h2 id="cookies-politica">7. Cookies</h2>
+      <p>Cookies são pequenos arquivos armazenados no navegador. Este site não utiliza cookies próprios nem emprega ferramentas de análise ou de publicidade; o provedor de hospedagem pode utilizar cookies técnicos estritamente necessários à segurança do site. Caso isso mude, esta política será atualizada e um aviso de consentimento será exibido na primeira visita. Você também pode gerenciar os cookies nas configurações do seu navegador.</p>
+      <h2 id="armazenamento">8. Armazenamento e prazo</h2>
+      <p>O site não armazena dados pessoais. As mensagens de contato de quem não inicia acompanhamento são mantidas apenas pelo tempo necessário para responder e excluídas periodicamente, em geral a cada seis meses. Os dados de quem está em acompanhamento, incluindo as mensagens trocadas, são mantidos enquanto ele durar e, depois, pelo prazo exigido pelas normas profissionais e fiscais. Os registros documentais do atendimento psicológico, em meio físico ou digital, são guardados em local que garante sigilo, pelo prazo mínimo de cinco anos, conforme a Resolução CFP nº 1/2009 e suas alterações.</p>
+      <h2 id="seguranca">9. Segurança</h2>
+      <p>São adotadas medidas técnicas e administrativas razoáveis para proteger os dados contra acesso não autorizado, perda ou alteração.</p>
+      <h2 id="direitos">10. Seus direitos</h2>
+      <p>Conforme o artigo 18 da LGPD, você pode solicitar confirmação do tratamento, acesso, correção, anonimização, bloqueio ou eliminação de dados desnecessários, portabilidade, informações sobre compartilhamento e revogação do consentimento, pelo e-mail psinicole.leao@gmail.com. Os dados que precisam ser mantidos por obrigação legal ou regulatória, como o registro documental do atendimento, são preservados pelo prazo exigido, mesmo após um pedido de eliminação. Também é possível apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+      <h2 id="alteracoes">11. Alterações</h2>
+      <p>Esta política pode ser atualizada a qualquer momento. A versão vigente estará sempre disponível nesta página, com a data da última atualização.</p>
+      <p class="pol-caixa">Dúvidas ou solicitações sobre seus dados pessoais: <a href="mailto:psinicole.leao@gmail.com">psinicole.leao@gmail.com</a></p>
+    </div>
+  </section>
+</Base>

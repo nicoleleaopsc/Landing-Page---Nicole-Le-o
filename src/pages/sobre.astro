@@ -1,0 +1,94 @@
+---
+import Base from "../layouts/Base.astro";
+import { Picture } from "astro:assets";
+import fotoSobre from "../assets/fotos/nicole-leao-sobre.jpg";
+import { schemaSobre } from "../lib/schema";
+---
+
+<Base
+  titulo="Sobre Nicole Leão, psicóloga clínica em Maceió (CRP 15/8699)"
+  descricao="Conheça Nicole Leão, psicóloga clínica em Maceió (CRP 15/8699): trajetória, formação em TCC e parentalidade e o significado do dente-de-leão."
+  ogTitulo="Sobre Nicole Leão · Psicóloga clínica em Maceió"
+  ogDescricao="Sempre tive o dom de saber ouvir. Trajetória, formação e o significado do dente-de-leão."
+  jsonld={schemaSobre()}
+>
+  {/* Abertura: foto em largura total (celular) ou na metade esquerda (computador), texto abaixo ou ao lado */}
+  <section class="sobre-topo" id="inicio" aria-labelledby="titulo-pagina">
+    <figure class="sobre-foto">
+      <Picture src={fotoSobre} formats={["avif", "webp"]} fallbackFormat="jpg" widths={[420, 640, 840, 1200]} sizes="(min-width: 900px) 50vw, max(100vw, 416px)" alt="Nicole Leão, psicóloga clínica em Maceió, sorrindo" fetchpriority="high" loading="eager" decoding="async" />
+    </figure>
+    <div class="sobre-texto">
+      <nav class="trilha" aria-label="Você está em">
+        <ol><li><a href="/">Início</a></li><li aria-current="page">Sobre mim</li></ol>
+      </nav>
+      <h1 id="titulo-pagina"><span class="kw">Nicole Leão · Psicoterapeuta cognitivo-comportamental</span>Antes de ser profissão, a escuta já era caminho.</h1>
+      <p class="credencial">Psicóloga Clínica · CRP 15/8699</p>
+      <div class="links">
+        <a class="link-seta baixo" href="#trajetoria"><span>Ler minha trajetória</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
+        <a class="link-seta" href="/#caminhos" data-caminho="atendimentos"><span>Conheça os atendimentos</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  {/* Trajetória */}
+  <section class="faixa" id="trajetoria" aria-labelledby="titulo-trajetoria">
+    <div class="cont coluna">
+      <div class="texto revela">
+        <p class="rotulo">Trajetória</p>
+        <h2 id="titulo-trajetoria">Um caminho que não foi linear e que também me formou.</h2>
+        <p>A psicologia esteve presente na minha vida muito antes de virar escolha: nas leituras, nas conversas e na experiência de conhecer, também do lado de quem é cuidado, o valor de um espaço de escuta. Ainda assim, demorei a escolhê-la em definitivo. Cogitei a psicologia hospitalar, os cuidados paliativos e o luto perinatal; aproximei-me da psicanálise, sem me encontrar totalmente nela. A maior dúvida era o público: eu conseguiria atender crianças e adolescentes?</p>
+        <p>A resposta veio no estágio em uma clínica infantojuvenil, sob a supervisão de uma professora que se tornou amiga. Ali aprendi da gestão clínica à prática e me apaixonei pelo atendimento infantojuvenil e pela orientação parental. Escolhi a TCC como base e sigo me aprofundando na Terapia do Esquema e nos estudos sobre parentalidade.</p>
+        <p class="citacao">Cada dúvida do caminho virou clareza sobre o tipo de psicóloga que eu queria ser.</p>
+        <h3 class="subt">Marcos da trajetória</h3>
+        <ul class="linha-tempo">
+          <li>Graduação em Psicologia pelo Centro Universitário de Maceió (UNIMA)</li>
+          <li>Trabalho de conclusão de curso sobre estilos de apego, orientação parental e TDAH na infância e adolescência</li>
+          <li>Atendimento clínico supervisionado ainda durante a formação</li>
+          <li>Formação complementar em Perinatalidade</li>
+          <li>Registro profissional: CRP 15/8699</li>
+          <li>Especialização em Parentalidade (em andamento)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* Por que um dente-de-leão */}
+  <section class="faixa malva" id="dente-de-leao" aria-labelledby="titulo-simbolo">
+    <div class="cont simbolo">
+      {/* Símbolo da versão centralizada da logo (LOGO-08 da designer, sem o nome), só nesta seção; no resto do site segue a logo de sempre */}
+      <div class="simbolo-circ revela"><img class="simbolo-ilus" src="/assets/logo-centralizada.svg" width="220" height="220" loading="lazy" decoding="async" alt="Símbolo da marca: um dente-de-leão protegido por uma redoma de vidro, com sementes levadas pelo vento"></div>
+      <div class="simbolo-intro">
+        <p class="rotulo">Por que um dente-de-leão</p>
+        <h2 id="titulo-simbolo">Uma flor que carrega meu nome: o que acredito sobre cuidar.</h2>
+        <p>Escolhi o dente-de-leão porque ele representa, para mim, o ato de semear coisas boas: paz, amor, beleza, cuidado. E há nele algo de muito pessoal: o próprio nome da flor carrega o meu sobrenome, Leão.</p>
+      </div>
+      <ul class="simbolo-itens" data-cascata>
+        <li class="revela"><b>A coroa</b><p>Antes de se abrir, a flor forma uma coroa que remete à força e à nobreza. Mas essa coroa se desfaz para soltar as sementes, e é aí que mora, para mim, uma das imagens mais bonitas do cuidado: a vulnerabilidade, presente em todo ser humano, não precisa ser escondida. Merece ser olhada com carinho.</p></li>
+        <li class="revela"><b>A redoma</b><p>O vidro que envolve a flor fala de uma proteção delicada: acolhimento, escuta, cuidado. E carrega também a fragilidade do próprio vidro, a mesma que todos nós, e as famílias que acompanho, atravessamos em algum momento da vida.</p></li>
+        <li class="revela"><b>As sementes</b><p>Quando partem com o vento, simbolizam liberdade, fortaleza e autonomia: o caminho que desejo para quem passa pelo meu trabalho.</p></li>
+      </ul>
+      <p class="proposito revela">Acredito que a terapia vai além de aliviar um sintoma: é abrir espaço para que uma pessoa, e a família ao redor dela, recupere qualidade de vida e força emocional. Assim como o dente-de-leão entrega suas sementes ao vento, meu papel não é oferecer respostas prontas, mas caminhar ao lado de cada um até que encontre a própria autonomia.</p>
+      <p class="lema">Ciência e afeto para florescer com autonomia.</p>
+    </div>
+  </section>
+
+  {/* Conteúdos */}
+  <section class="faixa" id="conteudos" aria-labelledby="titulo-conteudos">
+    <div class="cont">
+      <div class="intro revela">
+        <p class="rotulo">Conteúdos</p>
+        <h2 class="subtitulo" id="titulo-conteudos">Para ler com calma.</h2>
+        <p>Materiais gratuitos para ajudar pais, educadores e jovens a compreender melhor as emoções, os vínculos e cada fase do desenvolvimento. Acesso livre, sem cadastro.</p>
+      </div>
+      {/* Quando os PDFs chegarem, trocar cada <span class="em-breve"> por:
+           <a class="btn btn-sec" href="cartilhas/quando-a-emocao-transborda.pdf" target="_blank" rel="noopener">Ler a cartilha</a> */}
+      <ul class="cartilhas" data-cascata>
+        <li class="revela"><article class="cartilha"><h3>Quando a emoção transborda</h3><p>Como acolher e orientar a criança nos momentos de emoção intensa.</p><span class="em-breve">Em breve</span></article></li>
+        <li class="revela"><article class="cartilha"><h3>Limites com afeto</h3><p>Firmeza e carinho podem caminhar juntos, e fazem diferença no dia a dia da família.</p><span class="em-breve">Em breve</span></article></li>
+        <li class="revela"><article class="cartilha"><h3>TDAH: um olhar para além do comportamento</h3><p>O que é, como o vínculo influencia e como apoiar em casa.</p><span class="em-breve">Em breve</span></article></li>
+        <li class="revela"><article class="cartilha"><h3>Como funciona a TCC</h3><p>O que esperar da terapia e por que ela é baseada em evidências.</p><span class="em-breve">Em breve</span></article></li>
+      </ul>
+      <a class="btn btn-sec insta" href="https://www.instagram.com/psinicole.leao" target="_blank" rel="noopener">Mais reflexões no Instagram: @psinicole.leao</a>
+    </div>
+  </section>
+</Base>

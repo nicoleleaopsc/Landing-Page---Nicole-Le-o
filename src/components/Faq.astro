@@ -1,0 +1,6 @@
+---
+// Dúvidas frequentes: o mesmo texto vai para os dados estruturados (FAQPage), em lib/schema.ts
+import { FAQ } from "../data/site";
+---
+
+{FAQ.map(({ pergunta, resposta }) => <details class="revela"><summary>{pergunta}</summary><p>{resposta}</p></details>)}

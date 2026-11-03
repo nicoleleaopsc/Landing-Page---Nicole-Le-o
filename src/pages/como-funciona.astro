@@ -1,0 +1,112 @@
+---
+import Base from "../layouts/Base.astro";
+import Faq from "../components/Faq.astro";
+import Pilulas from "../components/Pilulas.astro";
+import WhatsApp from "../components/WhatsApp.astro";
+import { schemaComoFunciona } from "../lib/schema";
+---
+
+<Base
+  titulo="Como funciona a terapia: primeiros passos e dúvidas | Nicole Leão"
+  descricao="Quando procurar ajuda, como é a abordagem (TCC), como é o primeiro encontro e as dúvidas mais comuns sobre a psicoterapia com Nicole Leão, em Maceió e online."
+  ogTitulo="Como funciona o acompanhamento · Nicole Leão"
+  ogDescricao="Quando procurar ajuda, como trabalho, como começamos e as dúvidas mais comuns."
+  jsonld={schemaComoFunciona()}
+>
+  <section class="pagina-topo" id="inicio" aria-labelledby="titulo-pagina">
+    <div class="cont">
+      <nav class="trilha" aria-label="Você está em">
+        <ol><li><a href="/">Início</a></li><li aria-current="page">Como funciona</li></ol>
+      </nav>
+      <h1 id="titulo-pagina"><span class="kw">Psicoterapia em Maceió e online</span>Como funciona o acompanhamento</h1>
+      <p class="sub">Cada fase da vida traz as suas descobertas e os seus desafios, e nem sempre é fácil atravessá-los sozinho. Às vezes, o que se sente ainda não tem nome; outras vezes, a família percebe que algo mudou, mas não sabe por onde começar. A terapia nasce desse lugar: um tempo de cuidado, com escuta atenta e sem pressa, para compreender o que acontece por dentro e cultivar, aos poucos, novas formas de seguir.</p>
+      <ul class="atalhos" aria-label="Ir direto para">
+        <li><a href="#como-cuido">Como cuido</a></li>
+        <li><a href="#como-comecamos">Como começamos</a></li>
+        <li><a href="#duvidas">Dúvidas</a></li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Como cuido (Redoma) */}
+  <section class="faixa clara" id="como-cuido" aria-labelledby="titulo-cuido">
+    <div class="cont coluna">
+      <div class="texto revela">
+        <p class="rotulo fio"><span class="fio-ic" aria-hidden="true"><svg><use href="#l-cupula"/></svg></span>Redoma <span class="sep">·</span> Como cuido</p>
+        <h2 id="titulo-cuido">Olhar para o presente sem perder de vista as raízes.</h2>
+        <p>Trabalho com a Terapia Cognitivo-Comportamental (TCC), abordagem baseada em evidências que auxilia a identificar e transformar os padrões de pensamento, emoção e comportamento que sustentam o sofrimento no presente.</p>
+        <p>Meus conhecimentos, respaldados também na Terapia do Esquema, ampliam esse olhar: busco compreender onde esses padrões começaram, muitas vezes na infância, a partir de necessidades emocionais que não foram plenamente atendidas, e como eles se repetem hoje. Esse percurso possibilita o entendimento do sujeito em sua totalidade e me permite identificar a configuração de tratamento que melhor se encaixa a cada realidade e às necessidades específicas do momento, estruturando individualmente o plano terapêutico mais adequado.</p>
+        <p>No atendimento infantojuvenil, esse plano ganha contornos próprios: o desenvolvimento tem sua própria linguagem em cada idade, e o processo terapêutico se adapta a ela. Com as crianças, o brincar, as histórias e os recursos visuais são a ponte para reconhecer emoções, compreender pensamentos e experimentar novas formas de agir, sempre buscando a coparticipação dos pais, que levam esse aprendizado para o dia a dia. Com os adolescentes, o diálogo ganha espaço, respeitando a busca por autonomia e a construção da identidade.</p>
+        <p>Em todas as faixas etárias que contemplo, procuro contribuir com um olhar atento às necessidades emocionais de cada momento: segurança, aceitação, limites e liberdade para se expressar.</p>
+        <p class="citacao">Compreender a própria história é o que abre espaço para escrever, com mais liberdade, os próximos capítulos.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* O que sustenta meu cuidado */}
+  <section class="faixa malva" id="pilares" aria-labelledby="titulo-pilares">
+    <div class="cont">
+      <div class="intro revela">
+        <h2 class="subtitulo" id="titulo-pilares">O que sustenta meu cuidado</h2>
+        <p class="apoio">Quatro bases presentes em todo o acompanhamento.</p>
+      </div>
+      <ul class="pilares" data-cascata>
+        <li class="pilar revela"><h3>Acolhimento e escuta</h3><p>Presença atenta e sem pressa, para que cada pessoa, da criança ao jovem adulto, se sinta ouvida em sua singularidade e no seu próprio tempo. Tudo o que é dito encontra um espaço seguro, tratado com sigilo e respeito.</p></li>
+        <li class="pilar revela"><h3>A linguagem de cada fase</h3><p>Na infância, a ludicidade do brincar é a forma mais natural de expressar o que se sente; com adolescentes e jovens adultos, o diálogo abre caminho. Cada etapa do desenvolvimento é respeitada em seus recursos, interesses e desafios.</p></li>
+        <li class="pilar revela"><h3>Família como parceira</h3><p>A parentalidade não é um trabalho paralelo à clínica infantojuvenil: é parte dela. Os pais participam do processo, com espaço para orientação e devolutivas, porque o cuidado se fortalece quando se estende à rotina de casa.</p></li>
+        <li class="pilar revela"><h3>Ciência e supervisão</h3><p>Intervenções fundamentadas em evidências, planejadas a partir dos objetivos de cada caso e acompanhadas por supervisão clínica regular. A formação é contínua, com especialização em Parentalidade em andamento e outras futuras especializações previstas.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Como começamos (Cuidado) */}
+  <section class="faixa salvia" id="como-comecamos" aria-labelledby="titulo-comecamos">
+    <div class="cont duas">
+      <div class="texto revela">
+        <p class="rotulo fio"><span class="fio-ic" aria-hidden="true"><svg><use href="#l-dente"/></svg></span>Cuidado <span class="sep">·</span> Como começamos</p>
+        <h2 id="titulo-comecamos">Do primeiro contato ao primeiro encontro: um passo de cada vez.</h2>
+        <p>Dar o primeiro passo nem sempre é simples. Para tornar esse início mais leve, organizei o caminho até o primeiro encontro em quatro etapas.</p>
+        <div class="cta-bloco">
+          <WhatsApp class="btn btn-pri" msg="modelo" origem="como-comecamos" icone>Agendar pelo WhatsApp</WhatsApp>
+        </div>
+      </div>
+      <ol class="etapas" data-cascata>
+        <li class="etapa revela"><h3>Envie uma mensagem</h3><p>Pelo WhatsApp, conte seu nome, para quem é o atendimento (e a idade, no caso de crianças e adolescentes) e, se quiser, uma breve ideia do que motivou a busca. Não é preciso explicar tudo agora.</p></li>
+        <li class="etapa revela"><h3>Conversamos sobre o atendimento</h3><p>Explico como funciona o acompanhamento psicológico, oriento sobre os próximos passos e esclareço as dúvidas que surgirem.</p></li>
+        <li class="etapa revela"><h3>Escolhemos formato e horário</h3><p>Definimos juntos se será presencial ou online e o melhor dia e horário. No presencial, envio o endereço; no online, o link do Google Meet chega antes do encontro.</p></li>
+        <li class="etapa revela"><h3>O primeiro encontro</h3><p>Um tempo para nos conhecermos, para ouvir com calma o que trouxe você até aqui e para que você também sinta, no seu ritmo, se este é o espaço que procura. Não é preciso chegar com as palavras certas, vamos encontrando juntos.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  {/* Quando procurar: faixa estreita que leva aos sinais da página inicial e a cada atendimento */}
+  <section class="faixa-procurar" id="quando-procurar" aria-labelledby="titulo-procurar">
+    <div class="cont procurar">
+      <div class="procurar-texto revela">
+        <p class="rotulo">Quando procurar</p>
+        <h2 id="titulo-procurar">Ainda não sabe se é o momento?</h2>
+        <p>Às vezes, o motivo para buscar ajuda é claro; outras vezes, é apenas a percepção de que algo mudou e merece atenção. Os sinais mais comuns em crianças, adolescentes, jovens adultos e famílias estão reunidos na página inicial.</p>
+        <a class="link-seta" href="/#motivos" data-caminho="sinais"><span>Ver os sinais mais comuns</span><svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        <p class="chamada">Conheça cada atendimento</p>
+        <Pilulas />
+      </div>
+      <div class="procurar-fim revela">
+        <p>O primeiro encontro serve justamente para compreender o momento e pensar juntos no melhor caminho.</p>
+        <WhatsApp class="btn btn-sec" msg="geral" origem="quando-procurar" icone>Conversar pelo WhatsApp</WhatsApp>
+      </div>
+    </div>
+  </section>
+
+  {/* Dúvidas */}
+  <section class="faixa" id="duvidas" aria-labelledby="titulo-duvidas">
+    <div class="cont estreito">
+      <div class="intro revela">
+        <p class="rotulo">Dúvidas</p>
+        <h2 id="titulo-duvidas">Perguntas frequentes</h2>
+      </div>
+      <div class="faq" data-cascata>
+        <Faq />
+      </div>
+    </div>
+  </section>
+</Base>
