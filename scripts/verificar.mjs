@@ -5,7 +5,7 @@ import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const DIST = fileURLToPath(new URL("../dist/", import.meta.url));
-const SITE = "https://www.nicoleleao.com.br";
+const SITE = "https://nicoleleao.psc.br";
 
 if (!existsSync(DIST)) {
   console.error("Pasta dist/ não encontrada. Rode antes: npm run build");

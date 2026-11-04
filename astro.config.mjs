@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 const fontes = "./node_modules/@fontsource-variable";
 
 export default defineConfig({
-  site: "https://www.nicoleleao.com.br",
+  site: "https://nicoleleao.psc.br",
   trailingSlash: "always",
   build: { format: "directory" },
   // Mantém os espaços entre elementos de texto (o padrão novo, "jsx", os removeria)

@@ -1,7 +1,7 @@
 // Dados do site num lugar só: contato, mensagens do WhatsApp, atendimentos, sinais e dúvidas frequentes.
 // Tudo o que aparece em mais de uma página (ou nos dados estruturados) sai daqui.
 
-export const SITE_URL = "https://www.nicoleleao.com.br";
+export const SITE_URL = "https://nicoleleao.psc.br";
 
 /** Google Analytics 4: preencha o ID (ex.: "G-XXXXXXX") para ativar. Vazio = nenhum cookie e nenhum aviso. */
 export const GA_ID = "";
