@@ -88,6 +88,8 @@ const conhecer = (titulo: string) => `Conhecer a ${titulo[0]!.toLowerCase()}${ti
       fixar();
     });
     troca.classList.add("pronto");
+    // Dois quadros depois, com os painéis já no lugar, as trocas passam a ter transição
+    requestAnimationFrame(() => requestAnimationFrame(() => troca.classList.add("animado")));
 
     if (!reduzMov.matches) {
       troca.classList.add("girando", "pausado");

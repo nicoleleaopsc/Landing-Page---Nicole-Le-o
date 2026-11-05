@@ -33,7 +33,8 @@
   /* Cabeçalho: recuo da área segura (entalhe/ilha) + um respiro, dividido entre cima e baixo para a logo ficar centralizada */
   --topo-respiro:10px;
   --topo-linha:60px;
-  --topo-altura:calc(var(--topo-respiro) + var(--topo-linha) + env(safe-area-inset-top, 0px));
+  /* + 1px da borda inferior do cabeçalho */
+  --topo-altura:calc(var(--topo-respiro) + var(--topo-linha) + 1px + env(safe-area-inset-top, 0px));
   /* Movimento: saída forte para entradas e toques, curva longa para deslocamentos */
   --ease-out:cubic-bezier(.23,1,.32,1);
   --ease-in-out:cubic-bezier(.77,0,.175,1);
@@ -52,6 +53,9 @@ html{scroll-behavior:smooth;scroll-padding-top:var(--topo-altura);-webkit-text-s
 @media (prefers-reduced-motion:no-preference){
   html{scroll-snap-type:y proximity}
   main > section,.rodape{scroll-snap-align:start}
+  /* O encaixe da primeira seção fica sempre no topo da página (a margem sobra e é cortada em 0). Se ficasse
+     1px abaixo, o navegador rolaria a página ao abrir, e o Chrome deixaria de medir o LCP (PageSpeed: NO_LCP) */
+  main > section:first-child{scroll-margin-top:50vh}
 }
 body{margin:0;background:var(--creme);color:var(--texto);font-family:var(--f-corpo);font-size:var(--t-m);line-height:1.65;font-optical-sizing:auto}
 img{max-width:100%;height:auto;display:block}
@@ -215,8 +219,12 @@ ul,ol{margin:0;padding:0}
 @keyframes nl-progresso{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .sinais-troca.pronto .sinais-paineis{gap:0}
 .sinais-troca.pronto .sinais-tit{display:none}
-.sinais-troca.pronto .sinais-painel{grid-area:1 / 1;visibility:hidden;opacity:0;transform:translateY(6px);transition:opacity .15s ease, transform .15s ease, visibility 0s .15s}
-.sinais-troca.pronto .sinais-painel.ativo{visibility:visible;opacity:1;transform:none;transition:opacity .3s var(--ease-out) .1s, transform .3s var(--ease-out) .1s, visibility 0s}
+.sinais-troca.pronto .sinais-painel{grid-area:1 / 1;visibility:hidden;opacity:0;transform:translateY(6px)}
+.sinais-troca.pronto .sinais-painel.ativo{visibility:visible;opacity:1;transform:none}
+/* As transições só valem depois da preparação (classe "animado", posta pelo script): ao abrir a página,
+   os painéis inativos somem sem animar, em vez de rodar três transições logo no carregamento */
+.sinais-troca.animado .sinais-painel{transition:opacity .15s ease, transform .15s ease, visibility 0s .15s}
+.sinais-troca.animado .sinais-painel.ativo{transition:opacity .3s var(--ease-out) .1s, transform .3s var(--ease-out) .1s, visibility 0s}
 @media (min-width:700px){
   .sinais-troca.pronto .sinais-abas{flex-wrap:wrap;overflow:visible;margin-inline:0;padding-inline:0;-webkit-mask-image:none;mask-image:none}
   .motivos{grid-template-columns:1fr 1fr;column-gap:40px}
