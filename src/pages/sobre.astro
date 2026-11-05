@@ -7,7 +7,7 @@ import { schemaSobre } from "../lib/schema";
 
 <Base
   titulo="Sobre Nicole Leão, psicóloga clínica em Maceió (CRP 15/8699)"
-  descricao="Conheça Nicole Leão, psicóloga clínica em Maceió (CRP 15/8699): trajetória, formação em TCC e parentalidade e o significado do dente-de-leão."
+  descricao="Conheça Nicole Leão, psicóloga clínica em Maceió (CRP 15/8699): atendimento infantojuvenil, abordagem em TCC, trajetória e o significado do dente-de-leão."
   ogTitulo="Sobre Nicole Leão · Psicóloga clínica em Maceió"
   ogDescricao="Sempre tive o dom de saber ouvir. Trajetória, formação e o significado do dente-de-leão."
   jsonld={schemaSobre()}
@@ -21,7 +21,8 @@ import { schemaSobre } from "../lib/schema";
       <nav class="trilha" aria-label="Você está em">
         <ol><li><a href="/">Início</a></li><li aria-current="page">Sobre mim</li></ol>
       </nav>
-      <h1 id="titulo-pagina"><span class="kw">Nicole Leão · Psicoterapeuta cognitivo-comportamental</span>Antes de ser profissão, a escuta já era caminho.</h1>
+      {/* Espaços fixos (&nbsp;) para a linha de apoio só quebrar depois de cada "·", nunca no meio de um trecho */}
+      <h1 id="titulo-pagina"><span class="kw">Nicole&nbsp;Leão&nbsp;· Psicóloga&nbsp;clínica&nbsp;· atendimento&nbsp;infantojuvenil&nbsp;· abordagem&nbsp;em&nbsp;TCC</span>Antes de ser profissão, a escuta já era caminho.</h1>
       <p class="credencial">Psicóloga Clínica · CRP 15/8699</p>
       <div class="links">
         <a class="link-seta baixo" href="#trajetoria"><span>Ler minha trajetória</span><svg aria-hidden="true"><use href="#i-baixo"/></svg></a>
