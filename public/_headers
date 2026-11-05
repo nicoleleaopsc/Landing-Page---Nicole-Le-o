@@ -1,0 +1,19 @@
+# Cabeçalhos HTTP do Cloudflare Pages (este arquivo vai para a raiz do site gerado)
+
+# Segurança, em todas as páginas. Sem Content-Security-Policy: o Astro usa scripts inline (menu, abas, JSON-LD)
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# CSS, fontes e fotos do build: o nome muda a cada versão, então podem ficar um ano em cache
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Logo, padrões e imagens com nome fixo: um dia
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/img/*
+  Cache-Control: public, max-age=86400
